@@ -1,0 +1,41 @@
+{
+  "name": "gatsby-starter-hello-world",
+  "description": "Simple Gatsby starter linked to Contentful",
+  "license": "MIT",
+  "author": "Connor Wilson <me@cwlsn.com> (https://cwlsn.com)",
+  "homepage": "https://gatsby-simple-contentful-starter.netlify.com",
+  "bugs": "https://github.com/cwlsn/gatsby-simple-contentful-starter/issues",
+  "repository": "github:cwlsn/gatsby-simple-contentful-starter",
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve"
+  },
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.10.0",
+    "dotenv": "^7.0.0",
+    "gatsby": "^2.3.25",
+    "gatsby-image": "^2.0.39",
+    "gatsby-plugin-google-fonts": "^0.0.4",
+    "gatsby-plugin-manifest": "^2.0.29",
+    "gatsby-plugin-react-helmet": "^3.0.12",
+    "gatsby-plugin-sharp": "^2.0.35",
+    "gatsby-plugin-styled-components": "^3.0.7",
+    "gatsby-source-contentful": "^2.0.50",
+    "gatsby-source-filesystem": "^2.0.29",
+    "gatsby-source-instagram-all": "^2.0.5",
+    "gatsby-transformer-remark": "^2.3.8",
+    "gatsby-transformer-sharp": "^2.1.18",
+    "moment": "^2.24.0",
+    "path": "^0.12.7",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-google-maps": "^9.4.5",
+    "react-helmet": "^5.2.0",
+    "react-icons": "^3.6.1",
+    "react-spring": "^8.0.19",
+    "react-masonry-css": "^1.0.12",
+    "react-spotify-player": "^1.0.4",
+    "styled-components": "^4.2.0"
+  }
+}
