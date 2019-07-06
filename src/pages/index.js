@@ -7,6 +7,7 @@ import Landing from '../components/Templates/Landing';
 import About from '../components/Templates/About';
 import Gallery from '../components/Templates/Gallery.js';
 import Stream from '../components/Templates/Stream.js';
+import Tour from '../components/Templates/Tour.js';
 
 const theme = {
   white: '#eeeeee',
@@ -85,6 +86,7 @@ const HomePage = () => {
     <About theme={theme} changePage={changePage} />,
     <Gallery theme={theme} changePage={changePage} />,
     <Stream theme={theme} changePage={changePage} />,
+    <Tour theme={theme} changePage={changePage} />,
   ];
 
   function changePage(index) {

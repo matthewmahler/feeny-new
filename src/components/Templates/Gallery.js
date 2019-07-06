@@ -2,6 +2,7 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
+
 import MediaWrapper from '../Containers/MediaWrapper';
 import img from '../../images/casey-horner-1sim8ojvCbE-unsplash.jpg';
 import Nav from '../Containers/Nav';

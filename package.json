@@ -33,9 +33,9 @@
     "react-google-maps": "^9.4.5",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.6.1",
-    "react-spring": "^8.0.19",
     "react-masonry-css": "^1.0.12",
     "react-spotify-player": "^1.0.4",
+    "react-spring": "^8.0.19",
     "styled-components": "^4.2.0"
   }
 }

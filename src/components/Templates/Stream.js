@@ -11,8 +11,8 @@ import Nav from '../Containers/Nav';
 const Container = styled.div`
   background-image: linear-gradient(
       to bottom,
-      ${props => props.theme.black}cc,
-      ${props => props.theme.black}99
+      ${props => props.theme.blue}33,
+      ${props => props.theme.blue}11
     ),
     url(${props => props.bg});
   background-size: cover;
@@ -30,9 +30,8 @@ const Container = styled.div`
     min-height: 60%;
     background-image: linear-gradient(
         to bottom,
-        ${props => props.theme.blue}99,
-        ${props => props.theme.blue}cc,
-        ${props => props.theme.blue}77
+        ${props => props.theme.black}ee,
+        ${props => props.theme.black}99
       ),
       url(${props => props.bg});
     background-size: cover;
@@ -66,7 +65,7 @@ const Container = styled.div`
         font-size: 2em;
         span {
           color: ${props => props.theme.white};
-          border-bottom: 3px solid ${props => props.theme.darkBlue};
+          border-bottom: 3px solid ${props => props.theme.blue};
           text-align: center;
         }
       }

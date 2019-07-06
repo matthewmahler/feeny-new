@@ -55,7 +55,6 @@ const Landing = props => {
             logo {
               fluid {
                 base64
-                tracedSVG
                 src
                 srcSet
                 srcWebp

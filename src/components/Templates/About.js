@@ -8,8 +8,8 @@ import Nav from '../Containers/Nav';
 const Container = styled.div`
   background-image: linear-gradient(
       to bottom,
-      ${props => props.theme.darkBlue}99,
-      ${props => props.theme.darkBlue}55
+      ${props => props.theme.blue}44,
+      ${props => props.theme.blue}22
     ),
     url(${props => props.bg});
   background-size: cover;
@@ -27,36 +27,38 @@ const Container = styled.div`
     height: 60%;
     background-image: linear-gradient(
         to bottom,
-        ${props => props.theme.blue}99,
-        ${props => props.theme.blue}cc,
-        ${props => props.theme.blue}77
+        ${props => props.theme.black}cc,
+        ${props => props.theme.black}ee,
+        ${props => props.theme.black}99
       ),
       url(${props => props.bg});
     background-size: cover;
     background-repeat: no-repeat;
-    display: grid;
-    grid-template-rows: 1fr 5fr;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     border-radius: 1em;
     .buttons {
       background: transparent;
     }
     .headerWrapper {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-rows: 2fr 1fr 2fr;
       align-items: center;
       justify-content: center;
 
       h1 {
-        padding: 0;
+        place-self: center;
+        width: 30%;
+        text-align: center;
         box-sizing: border-box;
-        font-size: 4em;
+        font-size: 6em;
         font-family: 'miller';
         font-style: italic;
-        border-bottom: 3px solid ${props => props.theme.darkBlue};
+        border-bottom: 3px solid ${props => props.theme.blue};
         color: ${props => props.theme.white};
-        text-shadow: 0px 4px 3px ${props => props.theme.darkBlue},
+        text-shadow: 0px 4px 3px ${props => props.theme.blue},
           0px 8px 13px ${props => props.theme.black}99,
           0px 18px 23px ${props => props.theme.black}77;
       }
@@ -74,31 +76,28 @@ const Container = styled.div`
           color: ${props => props.theme.white};
         }
       }
-      span {
-        text-align: center;
-        margin: 1em;
-        color: ${props => props.theme.white};
-        :hover {
-          color: ${props => props.theme.black};
-        }
-      }
 
       .spotifyContainer {
-        background-color: ${props => props.theme.black};
-        margin: 1em;
-        width: 60%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
         .hollow-dots-spinner,
         .hollow-dots-spinner * {
           box-sizing: border-box;
         }
 
         .hollow-dots-spinner {
+          background-color: ${props => props.theme.black};
           display: ${props => (props.loading ? 'grid' : 'none')};
           grid-template-columns: 1fr 1fr 1fr;
           height: 80px;
           width: calc(30px * 3);
           align-items: center;
           justify-content: center;
+          width: 60%;
         }
 
         .hollow-dots-spinner .dot {
@@ -135,6 +134,7 @@ const Container = styled.div`
         }
         .SpotifyPlayer {
           display: ${props => (props.loading ? 'none' : 'auto')};
+          width: 60%;
         }
       }
     }
@@ -216,7 +216,6 @@ const About = props => {
                       __html: data.contentfulAbout.bio.childMarkdownRemark.html,
                     }}
                   />
-                  <span>... Read More</span>
 
                   <div className="spotifyContainer">
                     <div className="hollow-dots-spinner">
