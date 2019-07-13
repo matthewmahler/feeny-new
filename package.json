@@ -12,6 +12,11 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.19",
+    "@fortawesome/free-brands-svg-icons": "^5.9.0",
+    "@fortawesome/free-regular-svg-icons": "^5.9.0",
+    "@fortawesome/free-solid-svg-icons": "^5.9.0",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "babel-plugin-styled-components": "^1.10.0",
     "dotenv": "^7.0.0",
     "gatsby": "^2.3.25",
@@ -34,7 +39,6 @@
     "react-helmet": "^5.2.0",
     "react-icons": "^3.6.1",
     "react-masonry-css": "^1.0.12",
-    "react-spotify-player": "^1.0.4",
     "react-spring": "^8.0.19",
     "styled-components": "^4.2.0"
   }

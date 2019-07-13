@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { animated, useTrail } from 'react-spring';
 import Masonry from 'react-masonry-css';
 import InstagramPhoto from '../Containers/InstagramPhoto';
@@ -61,26 +61,55 @@ const Container = styled.div`
         transition: 0s;
         box-shadow: 10px 10px 5px 0px ${props => props.theme.white}cc;
       }
-      a {
-        border-bottom: none;
-      }
-      img,
-      video {
-        width: 100%;
-      }
-      img {
-        opacity: 1;
-        display: block;
-        width: 100%;
-        height: auto;
 
-        backface-visibility: hidden;
+      .profileImageContainer {
+        img,
+        video {
+          width: 100%;
+        }
+        img {
+          opacity: 1;
+          display: block;
+          width: 100%;
+          height: auto;
+          transition: 0.2s;
+          backface-visibility: hidden;
+        }
+        .overlay {
+          background-color: ${props => props.theme.black}cc;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          width: 80%;
+          min-height: 50%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          padding: 0.5em;
+          border-radius: 1em;
+          p {
+            color: ${props => props.theme.white}ff;
+            font-size: 1.2em;
+            text-align: center;
+            a {
+              color: ${props => props.theme.white}ff;
+              text-decoration: none;
+            }
+          }
+          .likes {
+            font-size: 1em;
+          }
+        }
       }
     }
   }
 `;
 
 const MediaWrapper = props => {
+  const [hovered, setHovered] = useState(null);
+
   const trail = useTrail(props.media.length, {
     marginLeft: 0,
     opacity: 1,
@@ -109,23 +138,73 @@ const MediaWrapper = props => {
             return props.media[i].node.videos == null ? (
               <animated.div key={i} style={animation}>
                 <InstagramPhoto key={i}>
-                  <a href={props.media[i].node.link}>
+                  <div
+                    className="profileImageContainer"
+                    onMouseOver={() => setHovered(i)}
+                    onMouseOut={() => setHovered(null)}
+                    key={i}
+                  >
                     <img
                       src={props.media[i].node.images.standard_resolution.url}
                       alt=""
                     />
-                  </a>
+                    <div
+                      className="overlay"
+                      style={{
+                        opacity: hovered === i ? 1 : 0,
+                        transition: '0.3s',
+                      }}
+                    >
+                      <p>
+                        <a
+                          href={props.media[i].node.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {props.media[i].node.caption.text}
+                        </a>
+                      </p>
+
+                      <p className="likes">
+                        {props.media[i].node.likes.count} Likes
+                      </p>
+                    </div>
+                  </div>
                 </InstagramPhoto>
               </animated.div>
             ) : (
               <animated.div key={i} style={animation}>
                 <InstagramVideo key={i}>
-                  <a href={props.media[i].node.link}>
+                  <div
+                    className="profileImageContainer"
+                    onMouseOver={() => setHovered(i)}
+                    onMouseOut={() => setHovered(null)}
+                    key={i}
+                  >
                     <video
                       src={props.media[i].node.videos.standard_resolution.url}
                       controls
                     />
-                  </a>
+                    <div
+                      className="overlay"
+                      style={{
+                        opacity: hovered === i ? 1 : 0,
+                        transition: '0.3s',
+                      }}
+                    >
+                      <p>
+                        <a
+                          href={props.media[i].node.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {props.media[i].node.caption.text}
+                        </a>
+                      </p>
+
+                      <p>{props.media[i].node.likes.count} Likes</p>
+                    </div>
+                  </div>
                 </InstagramVideo>
               </animated.div>
             );

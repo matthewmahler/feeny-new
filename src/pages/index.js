@@ -8,6 +8,8 @@ import About from '../components/Templates/About';
 import Gallery from '../components/Templates/Gallery.js';
 import Stream from '../components/Templates/Stream.js';
 import Tour from '../components/Templates/Tour.js';
+import Nav from '../components/Containers/Nav';
+import bg from '../images/IMG_9354.jpg';
 
 const theme = {
   white: '#eeeeee',
@@ -51,7 +53,7 @@ html{
 
 const Container = styled.div`
   min-width: 100vw;
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -71,7 +73,6 @@ const Container = styled.div`
 `;
 
 const HomePage = () => {
-  const [entered, setEntered] = useState(false);
   const [pageIndex, setPage] = useState(0);
 
   const fade = useSpring({
@@ -83,10 +84,11 @@ const HomePage = () => {
   });
 
   const pages = [
+    <Landing theme={theme} changePage={changePage} />,
     <About theme={theme} changePage={changePage} />,
     <Gallery theme={theme} changePage={changePage} />,
     <Stream theme={theme} changePage={changePage} />,
-    <Tour theme={theme} changePage={changePage} />,
+    <Tour theme={theme} changePage={changePage} bg={bg} />,
   ];
 
   function changePage(index) {
@@ -95,13 +97,11 @@ const HomePage = () => {
   return (
     <Layout theme={theme}>
       <GlobalStyle />
-      {entered ? (
+
+      <animated.div style={fade}>
+        <Nav changePage={changePage} theme={theme} />
         <Container theme={theme}>{pages[pageIndex]}</Container>
-      ) : (
-        <animated.div style={fade}>
-          <Landing theme={theme} setEntered={setEntered} />
-        </animated.div>
-      )}
+      </animated.div>
     </Layout>
   );
 };

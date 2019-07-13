@@ -6,8 +6,6 @@ import SpotifyPlayer from '../Containers/SpotifyPlayer';
 import Video from '../Containers/Video';
 import img from '../../images/AMS_0618.jpg';
 
-import Nav from '../Containers/Nav';
-
 const Container = styled.div`
   background-image: linear-gradient(
       to bottom,
@@ -156,7 +154,6 @@ const Stream = props => {
 
         return (
           <animated.div style={mainFade}>
-            <Nav changePage={props.changePage} theme={props.theme} />
             <Container theme={props.theme} bg={img} loading={loading}>
               <div className="wrapper">
                 <div className="streams">

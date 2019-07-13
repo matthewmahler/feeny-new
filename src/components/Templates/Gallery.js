@@ -5,7 +5,6 @@ import { useSpring, animated } from 'react-spring';
 
 import MediaWrapper from '../Containers/MediaWrapper';
 import img from '../../images/casey-horner-1sim8ojvCbE-unsplash.jpg';
-import Nav from '../Containers/Nav';
 
 const Container = styled.div`
   display: flex;
@@ -55,7 +54,6 @@ const Media = props => {
         const media = data.allInstagramContent.edges;
         return (
           <Container theme={props.theme}>
-            <Nav changePage={props.changePage} theme={props.theme} />
             <animated.div className="wrapper" style={mainFade}>
               <MediaWrapper media={media} theme={props.theme} />
             </animated.div>
@@ -75,6 +73,12 @@ const query = graphql`
         node {
           link
           type
+          comments {
+            count
+          }
+          likes {
+            count
+          }
           caption {
             text
           }

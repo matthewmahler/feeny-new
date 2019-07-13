@@ -2,23 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import ShowList from '../Containers/ShowList';
 import Map from '../Containers/Map';
-import Nav from '../Containers/Nav';
 import { useFetch } from '../Hooks/useFetch';
-import bg from '../../images/IMG_9354.jpg';
 
 const Container = styled.div`
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(
-      to bottom,
-      ${props => props.theme.darkBlue}99,
-      ${props => props.theme.darkBlue}55
-    ),
-    url(${props => props.bg});
+  background-image: url(${props => props.bg});
   background-size: cover;
   background-repeat: no-repeat;
   box-sizing: border-box;
@@ -31,16 +24,7 @@ const Container = styled.div`
     grid-gap: 1em;
     align-items: center;
     justify-content: center;
-    h2 {
-      box-sizing: border-box;
-      font-size: 2em;
-      color: ${props => props.theme.white};
-      text-align: center;
-      span {
-        border-bottom: 5px solid ${props => props.theme.blue};
-        padding-bottom: 3px;
-      }
-    }
+
     .tour {
       box-sizing: border-box;
 
@@ -83,19 +67,12 @@ const Tour = props => {
   }&date=all`;
   const [data, loading] = useFetch(url);
   return (
-    <Container id="tour" theme={props.theme} bg={bg}>
-      <Nav changePage={props.changePage} theme={props.theme} />
+    <Container id="tour" theme={props.theme} bg={props.bg}>
       <div className="wrapper">
         <div className="map">
-          <h2>
-            <span>Map</span>
-          </h2>
           {loading ? 'Loading...' : <Map data={data} theme={props.theme} />}
         </div>
         <div className="tour">
-          <h2>
-            <span>Dates</span>
-          </h2>
           {loading ? (
             'Loading...'
           ) : (

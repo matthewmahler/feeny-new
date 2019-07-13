@@ -20,7 +20,6 @@ const MapComponent = compose(
   <GoogleMap defaultZoom={7} defaultCenter={{ lat: 41.492, lng: -74.901 }}>
     {props.isMarkerShown && props.data ? (
       props.data.map((marker, i) => {
-        console.log(marker.venue);
         return (
           <Marker
             key={i}

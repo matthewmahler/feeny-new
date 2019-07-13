@@ -52,10 +52,11 @@ const Container = styled.div`
 const Nav = props => {
   const buttons = [
     { text: 'Home' },
+    { text: 'About' },
     { text: 'Media' },
     { text: 'Stream' },
     { text: 'Tour' },
-    { text: 'Bio' },
+
     { text: 'Merch' },
   ];
   const trail = useTrail(buttons.length, {
