@@ -77,11 +77,13 @@ const Container = styled.div`
           cursor: pointer;
           background-color: transparent;
           border: none;
-
           :hover {
             color: ${props => props.theme.blue};
             box-sizing: border-box;
           }
+        }
+        .selected {
+          color: ${props => props.theme.blue};
         }
       }
       .about {
@@ -143,6 +145,12 @@ const About = props => {
                   html
                 }
               }
+              rig {
+                childMarkdownRemark {
+                  html
+                }
+              }
+              socialLinks
               position
               images {
                 id
@@ -168,19 +176,22 @@ const About = props => {
                     {trail.map((animation, index) => {
                       return (
                         <animated.div style={animation} key={index}>
-                          <button onClick={() => setCurrentBio(index)}>
+                          <button
+                            onClick={() => setCurrentBio(index)}
+                            className={currentBio === index ? 'selected' : null}
+                          >
                             {buttons[index].text}
                           </button>
                         </animated.div>
                       );
                     })}
                   </div>
-                  <div className="about">
+                  <animated.div className="about" style={mainFade}>
                     <Bio
                       theme={props.theme}
                       data={data.contentfulAbout.bios[currentBio]}
                     />
-                  </div>
+                  </animated.div>
                 </div>
               </div>
               <div className="wrapper2">

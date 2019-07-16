@@ -42,7 +42,7 @@ const Container = styled.div`
     h1 {
       font-family: 'miller';
       font-style: italic;
-      font-size: 6em;
+      font-size: 8em;
       font-weight: 300;
       color: ${props => props.theme.white};
       margin: 0.2em auto;
@@ -53,15 +53,15 @@ const Container = styled.div`
       align-items: center;
       justify-content: center;
       background-color: transparent;
-      padding: 1em;
-      font-size: 1.2em;
+      padding: 1em 1.5em;
+      font-size: 1.5em;
       font-weight: 600;
 
       color: ${props => props.theme.blue};
       border: 5px solid ${props => props.theme.blue};
       border-radius: 1em;
       span {
-        margin-right: 10px;
+        margin-right: 15px;
       }
       cursor: pointer;
     }
@@ -131,7 +131,14 @@ const Landing = props => {
               </div>
               <div className="landing">
                 <h1>Are You Leaving?</h1>
-                <button>
+                <button
+                  onClick={() =>
+                    window.open(
+                      'https://open.spotify.com/artist/4TWQJppHQYlY4FlzuvEDUc',
+                      '_blank'
+                    )
+                  }
+                >
                   <span> Listen Now On Spotify </span>
                   <FontAwesomeIcon icon={faSpotify} transform="grow-6" />
                 </button>
