@@ -21,7 +21,7 @@ const Container = styled.div`
     max-width: 90%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 1em;
+    grid-gap: 1rem;
     align-items: center;
     justify-content: center;
 
@@ -31,11 +31,11 @@ const Container = styled.div`
       max-width: 100%;
       div {
         width: 100%;
-        font-family: 'Quicksand';
+
         font-weight: 400;
         p {
-          font-size: 1.3em;
-          text-indent: 2em;
+          font-size: 1rem;
+          text-indent: 2rem;
         }
       }
     }
@@ -56,7 +56,7 @@ const Container = styled.div`
       padding: 0;
     }
     .tour > div > p {
-      font-size: 1em;
+      font-size: 1rem;
     }
   }
 `;

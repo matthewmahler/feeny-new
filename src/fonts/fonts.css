@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'miller';
-  src: url("./miller_text_roman-webfont.woff2") format("woff2"),
-    url("./miller_text_roman-webfont.woff") format("woff"),
-    url("./Miller Text Roman.otf") format("otf");
+  src: url("./Miller-DisplayItalic.woff2") format("woff2"),
+    url("./Miller-DisplayItalic.woff") format("woff"),
+    url("./Miller\ Display\ Italic.otf") format("otf");
 }

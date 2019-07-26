@@ -8,6 +8,7 @@ import About from '../components/Templates/About';
 import Gallery from '../components/Templates/Gallery.js';
 import Stream from '../components/Templates/Stream.js';
 import Tour from '../components/Templates/Tour.js';
+import Merch from '../components/Templates/Merch.js';
 import Nav from '../components/Containers/Nav';
 import bg from '../images/IMG_9354.jpg';
 
@@ -27,17 +28,29 @@ const theme = {
 
 const GlobalStyle = createGlobalStyle`
 html{
-    font-family: 'miller', '-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol', sans-serif; 
+    font-family: 'miller', "Trirong", "Montserrat", '-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol', sans-serif; 
     overflow: scroll;
+    font-size: 62.5%; 
     ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
 }
   box-sizing: border-box;
+  min-width: 100vw;
+  min-height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   }
-
+  h1, 
+    h2, 
+    h3{
+      font-family: "Trirong";
+      font-style: italic;
+    }
   body {
     margin:0;
+    font-family: "Montserrat";
+    
   }
   @media all and (max-width: 1200px) {
     width: 100%
@@ -45,6 +58,7 @@ html{
       margin: 0;
     }
     h1{
+      font-family: "Trirong";
       text-align: center;
     }
     
@@ -58,7 +72,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-items: center;
   align-content: center;
-  font-family: 'miller';
+
   div {
     width: 100%;
   }
@@ -89,6 +103,7 @@ const HomePage = () => {
     <Gallery theme={theme} changePage={changePage} />,
     <Stream theme={theme} changePage={changePage} />,
     <Tour theme={theme} changePage={changePage} bg={bg} />,
+    <Merch theme={theme} changePage={changePage} />,
   ];
 
   function changePage(index) {
@@ -100,7 +115,7 @@ const HomePage = () => {
 
       <animated.div style={fade}>
         <Nav changePage={changePage} theme={theme} />
-        <Container theme={theme}>{pages[pageIndex]}</Container>
+        <Container>{pages[pageIndex]}</Container>
       </animated.div>
     </Layout>
   );

@@ -16,8 +16,8 @@ const Container = styled.div`
   width: 100%;
   height: 90vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 2em;
+  grid-template-columns: 3fr 2fr;
+  grid-gap: 2rem;
   align-content: space-around;
   justify-content: space-between;
   .wrapper2 {
@@ -33,18 +33,18 @@ const Container = styled.div`
         ${props => props.theme.black}ee,
         ${props => props.theme.black}99
       );
-      border-radius: 1em;
+      border-radius: 1rem;
       box-sizing: border-box;
       max-height: 80vh;
       max-width: 90%;
-      padding: 2em;
+      padding: 1rem;
       position: absolute;
     }
     .wrapper {
-      padding: 2em;
+      padding: 2rem;
       width: 90%;
       box-sizing: border-box;
-      min-height: 60vh;
+      max-height: 80vh;
       background-image: linear-gradient(
           to bottom,
           ${props => props.theme.black}cc,
@@ -58,7 +58,7 @@ const Container = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border-radius: 1em;
+      border-radius: 1rem;
       .buttons {
         min-height: 20%;
         box-sizing: border-box;
@@ -71,9 +71,9 @@ const Container = styled.div`
           text-align: center;
           box-sizing: border-box;
           width: 100%;
-          font-size: 1em;
+          font-size: 1.2rem;
           color: ${props => props.theme.white};
-          padding: 0.5em;
+          padding: 1rem;
           cursor: pointer;
           background-color: transparent;
           border: none;
@@ -87,7 +87,6 @@ const Container = styled.div`
         }
       }
       .about {
-        margin-top: 1em;
         min-height: 90%;
         display: flex;
         flex-direction: column;
@@ -163,7 +162,6 @@ const About = props => {
         }
       `}
       render={data => {
-        console.log(data);
         return (
           <animated.div style={mainFade}>
             <Container

@@ -6,7 +6,7 @@ const Container = styled.div`
   width: 100%;
   max-height: 80vh;
   overflow-y: scroll;
-  font-size: 1em;
+  font-size: 1rem;
   ::-webkit-scrollbar { width: 0 !important }
   .parent {
     width: 100%;
@@ -26,7 +26,7 @@ const Container = styled.div`
       min-height: 5vh;
       transition: 0.2s ease-in-out;
       span{
-          padding: 1em 0;
+          padding: 1rem 0;
           display: flex;
           align-items: center;
           width: 100%;
@@ -55,7 +55,7 @@ const Container = styled.div`
     }
   }
   @media all and (max-width: 575px) {
-    font-size: 0.7em;
+    font-size: 1rem;
   }
 `;
 

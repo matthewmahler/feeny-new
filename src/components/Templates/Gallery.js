@@ -15,12 +15,14 @@ const Container = styled.div`
   background-image: url(${img});
   background-size: cover;
   background-repeat: no-repeat;
+  min-height: 90vh;
+  overflow: auto;
   .wrapper {
     .buttons {
       background: transparent;
     }
-    margin: 2em;
-    padding: 2em;
+
+    padding: 2rem;
     min-width: 60%;
     box-sizing: border-box;
     min-height: 60%;
@@ -30,7 +32,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 1em;
+    border-radius: 1rem;
     overflow: auto;
     ::-webkit-scrollbar {
       width: 0px; /* Remove scrollbar space */

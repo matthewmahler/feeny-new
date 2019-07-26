@@ -8,20 +8,21 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
+  min-height: 90vh;
   .mediaWrapper {
-    padding: 3em;
+    padding: 3rem;
     width: 80%;
-    height: 80%;
+    min-height: 80%;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    border-radius: 1em;
+    justify-content: flex-start;
+    border-radius: 1rem;
     .my-masonry-grid {
       display: -webkit-box; /* Not needed if autoprefixing */
       display: -ms-flexbox; /* Not needed if autoprefixing */
@@ -87,11 +88,11 @@ const Container = styled.div`
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          padding: 0.5em;
-          border-radius: 1em;
+          padding: 0.5rem;
+          border-radius: 1rem;
           p {
             color: ${props => props.theme.white}ff;
-            font-size: 1.2em;
+            font-size: 1.5rem;
             text-align: center;
             a {
               color: ${props => props.theme.white}ff;
@@ -99,7 +100,7 @@ const Container = styled.div`
             }
           }
           .likes {
-            font-size: 1em;
+            font-size: 1rem;
           }
         }
       }

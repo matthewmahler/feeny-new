@@ -42,7 +42,8 @@ const Container = styled.div`
     h1 {
       font-family: 'miller';
       font-style: italic;
-      font-size: 8em;
+      font-size: 10rem;
+
       font-weight: 300;
       color: ${props => props.theme.white};
       margin: 0.2em auto;
@@ -53,13 +54,14 @@ const Container = styled.div`
       align-items: center;
       justify-content: center;
       background-color: transparent;
-      padding: 1em 1.5em;
-      font-size: 1.5em;
+      padding: 2rem;
+      font-size: 2rem;
+
       font-weight: 600;
 
       color: ${props => props.theme.blue};
       border: 5px solid ${props => props.theme.blue};
-      border-radius: 1em;
+      border-radius: 1rem;
       span {
         margin-right: 15px;
       }

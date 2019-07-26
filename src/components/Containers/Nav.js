@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
 import { animated, useTrail, useSpring } from 'react-spring';
-import img from '../../images/feeny-logo-white.png';
 
 const Container = styled.div`
   max-width: 100vw;
@@ -16,24 +15,36 @@ const Container = styled.div`
     ${props => props.theme.black},
     ${props => props.theme.black}cc
   );
-  img {
+  h1 {
+    font-family: 'miller';
+    font-style: italic;
+    font-size: 4rem;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: ${props => props.theme.white};
     box-sizing: border-box;
-    margin: 1em;
-    height: 80%;
+    margin: 0;
+    padding-left: 3rem;
+    height: 100%;
     cursor: pointer;
+    letter-spacing: 5px;
   }
   .buttons {
+    padding-right: 2rem;
     box-sizing: border-box;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-gap: 1em;
+    grid-gap: 2rem;
     justify-content: center;
     align-items: center;
     div button {
       box-sizing: border-box;
       width: 90%;
-      font-size: 1em;
+      font-size: 1.5rem;
       color: ${props => props.theme.white};
       padding: 0.5em 0;
       cursor: pointer;
@@ -41,7 +52,7 @@ const Container = styled.div`
       border: none;
       :hover {
         border: 2px solid ${props => props.theme.white};
-        border-radius: 0.5em;
+        border-radius: 0.5rem;
         color: ${props => props.theme.black};
         background-color: ${props => props.theme.white}55;
       }
@@ -95,11 +106,9 @@ const Nav = props => {
       render={data => {
         return (
           <Container theme={props.theme}>
-            <animated.img
-              src={img}
-              style={slideRight}
-              onClick={() => props.changePage(0)}
-            />
+            <animated.h1 style={slideRight} onClick={() => props.changePage(0)}>
+              F E E N Y{' '}
+            </animated.h1>
             <div className="buttons">
               {trail.map((animation, index) => {
                 return (

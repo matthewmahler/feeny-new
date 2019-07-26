@@ -22,8 +22,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   .wrapper {
-    padding: 2em;
-    width: 60%;
+    padding: 2rem;
+    width: 80%;
     box-sizing: border-box;
     min-height: 60%;
     background-image: linear-gradient(
@@ -38,7 +38,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 1em;
+    border-radius: 1rem;
     .buttons {
       background: transparent;
     }
@@ -46,7 +46,7 @@ const Container = styled.div`
     .streams {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-gap: 3em;
+      grid-gap: 3rem;
       align-items: center;
       justify-content: center;
 
@@ -60,7 +60,7 @@ const Container = styled.div`
 
       .spotifyContainer h2,
       .youtube h2 {
-        font-size: 2em;
+        font-size: 3rem;
         span {
           color: ${props => props.theme.white};
           border-bottom: 3px solid ${props => props.theme.blue};

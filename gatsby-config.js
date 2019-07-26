@@ -9,7 +9,7 @@ const { spaceId, accessToken } = process.env;
 
 module.exports = {
   siteMetadata: {
-    title: 'Feeny',
+    title: 'Feeny || Between The Bookends',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -51,6 +51,13 @@ module.exports = {
       resolve: `gatsby-source-instagram-all`,
       options: {
         access_token: '1138377695.1677ed0.603c853dc7074a57b84edc6829eefdb4',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Trirong`, `Montserrat`],
+        display: 'swap',
       },
     },
   ],
