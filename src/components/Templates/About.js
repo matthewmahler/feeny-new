@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useSpring, animated, useTrail } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 import { StaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import BioContainer from '../Containers/BioContainer';
@@ -89,6 +89,9 @@ const About = props => {
     opacity: 1,
   });
 
+  let height = window.innerHeight;
+  let width = window.innerWidth;
+
   const [currentBio, setCurrentBio] = useState(0);
 
   const buttons = [
@@ -98,11 +101,7 @@ const About = props => {
     { text: 'Joe MacPhee' },
     { text: 'Matt Mahler' },
   ];
-  const trail = useTrail(buttons.length, {
-    opacity: 1,
-    transform: 'translate3d(0,0,0)',
-    from: { opacity: 0, transform: 'translate3d(100px,-20px,0)' },
-  });
+
   return (
     <StaticQuery
       query={graphql`
@@ -123,7 +122,20 @@ const About = props => {
               }
               socialLinks
               position
-              profileImage {
+              landscapeProfileImage {
+                id
+                fluid(quality: 100) {
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                  srcSetWebp
+                  srcWebp
+                  tracedSVG
+                }
+              }
+              portraitProfileImage {
                 id
                 fluid(quality: 100) {
                   aspectRatio
@@ -141,21 +153,21 @@ const About = props => {
         }
       `}
       render={data => {
-        const imageData =
-          data.contentfulAbout.bios[currentBio].profileImage.fluid;
+        const portrait =
+          data.contentfulAbout.bios[currentBio].portraitProfileImage.fluid;
+        const landscape =
+          data.contentfulAbout.bios[currentBio].landscapeProfileImage.fluid;
         return (
           <animated.div style={mainFade}>
             <BackgroundImage
               Tag="section"
-              fluid={imageData}
+              fluid={height > width ? portrait : landscape}
               backgroundColor={props.theme.darkBlue}
               fadeIn={true}
             >
               <Container
                 theme={props.theme}
-                bg={
-                  data.contentfulAbout.bios[currentBio].profileImage.fluid.src
-                }
+                bg={height > width ? portrait.src : landscape.src}
               >
                 <div className="cardWrapper">
                   <div className="buttons">
