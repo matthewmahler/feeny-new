@@ -106,7 +106,7 @@ const Container = styled.div`
       }
     }
   }
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 420px) {
     .mediaWrapper {
       padding: 0;
       margin: 1rem;

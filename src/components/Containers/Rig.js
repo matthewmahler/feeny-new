@@ -34,7 +34,7 @@ const Container = styled.div`
       max-width: 960px;
     }
   }
-  @media only screen and (max-width: 376px) {
+  @media only screen and (max-width: 420px) {
     padding: 0;
     div {
       h3 {

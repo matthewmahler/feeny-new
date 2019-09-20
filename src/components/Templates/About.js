@@ -62,7 +62,7 @@ const Container = styled.div`
       }
     }
   }
-  @media only screen and (max-width: 376px) {
+  @media only screen and (max-width: 420px) {
     section::after,
     section::before {
       background-color: ${props => props.theme.black};

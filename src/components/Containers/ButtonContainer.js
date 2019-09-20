@@ -29,7 +29,7 @@ const Container = styled.div`
     color: ${props => props.theme.blue};
     border-bottom: 1px solid ${props => props.theme.blue};
   }
-  @media only screen and (max-width: 376px) {
+  @media only screen and (max-width: 420px) {
     button {
       font-size: 0.7rem;
     }

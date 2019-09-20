@@ -53,7 +53,7 @@ const Container = styled.nav`
     }
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 420px) {
     display: flex;
     flex-direction: column;
     h1 {

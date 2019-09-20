@@ -142,7 +142,7 @@ const Container = styled.div`
       }
     }
   }
-  @media only screen and (max-width: 376px) {
+  @media only screen and (max-width: 420px) {
     background-image: linear-gradient(
       to bottom,
       ${props => props.theme.black}cc,

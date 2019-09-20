@@ -90,7 +90,7 @@ const Container = styled.div`
     color: ${props => props.theme.white};
     text-align: center;
   }
-  @media only screen and (max-width: 376px) {
+  @media only screen and (max-width: 420px) {
     padding: 0;
     h1 {
       font-size: 2rem;

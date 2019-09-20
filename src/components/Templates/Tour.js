@@ -53,7 +53,7 @@ const Container = styled.div`
       justify-content: center;
     }
   }
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 420px) {
     .wrapper {
       padding: 0;
     }
