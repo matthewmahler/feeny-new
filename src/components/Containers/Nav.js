@@ -1,20 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { StaticQuery, graphql } from 'gatsby';
 import { animated, useTrail, useSpring } from 'react-spring';
 
-const Container = styled.div`
-  max-width: 100vw;
+const Container = styled.nav`
+  width: 100%;
   height: 10vh;
   display: grid;
   grid-template-columns: 2fr 1fr;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(
-    to right,
-    ${props => props.theme.black},
-    ${props => props.theme.black}cc
-  );
+  background-color: ${props => props.theme.black};
+  position: sticky;
+  z-index: 100;
   h1 {
     font-family: 'miller';
     font-style: italic;
@@ -51,10 +48,36 @@ const Container = styled.div`
       background-color: transparent;
       border: none;
       :hover {
-        border: 2px solid ${props => props.theme.white};
-        border-radius: 0.5rem;
-        color: ${props => props.theme.black};
-        background-color: ${props => props.theme.white}55;
+        color: ${props => props.theme.blue};
+      }
+    }
+  }
+
+  @media only screen and (max-width: 375px) {
+    display: flex;
+    flex-direction: column;
+    h1 {
+      padding: 0;
+      font-size: 2.5rem;
+    }
+    .buttons {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding-right: 0;
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        button {
+          margin: 0 1rem;
+          text-align: center;
+          font-size: 1rem;
+          padding-bottom: 0.5rem;
+        }
       }
     }
   }
@@ -67,13 +90,13 @@ const Nav = props => {
     { text: 'Media' },
     { text: 'Stream' },
     { text: 'Tour' },
-
     { text: 'Merch' },
   ];
+
   const trail = useTrail(buttons.length, {
     opacity: 1,
     transform: 'translate3d(0,0,0)',
-    from: { opacity: 0, transform: 'translate3d(100px,-20px,0)' },
+    from: { opacity: 0, transform: 'translate3d(100px,0,0)' },
   });
 
   const slideRight = useSpring({
@@ -86,44 +109,23 @@ const Nav = props => {
   });
 
   return (
-    <StaticQuery
-      query={graphql`
-        query NavQuery {
-          contentfulLanding {
-            logo {
-              fluid {
-                base64
-                src
-                srcSet
-                srcWebp
-                srcSetWebp
-                sizes
-              }
-            }
-          }
-        }
-      `}
-      render={data => {
-        return (
-          <Container theme={props.theme}>
-            <animated.h1 style={slideRight} onClick={() => props.changePage(0)}>
-              F E E N Y{' '}
-            </animated.h1>
-            <div className="buttons">
-              {trail.map((animation, index) => {
-                return (
-                  <animated.div style={animation} key={index}>
-                    <button onClick={() => props.changePage(index)}>
-                      {buttons[index].text}
-                    </button>
-                  </animated.div>
-                );
-              })}
-            </div>
-          </Container>
-        );
-      }}
-    />
+    <Container theme={props.theme} id="page-wrap">
+      <animated.h1 style={slideRight} onClick={() => props.changePage(0)}>
+        F E E N Y
+      </animated.h1>
+
+      <div className="buttons">
+        {trail.map((animation, index) => {
+          return (
+            <animated.div style={animation} key={index}>
+              <button onClick={() => props.changePage(index)}>
+                {buttons[index].text}
+              </button>
+            </animated.div>
+          );
+        })}
+      </div>
+    </Container>
   );
 };
 

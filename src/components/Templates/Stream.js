@@ -7,6 +7,12 @@ import Video from '../Containers/Video';
 import img from '../../images/AMS_0618.jpg';
 
 const Container = styled.div`
+  width: 100vw;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-image: linear-gradient(
       to bottom,
       ${props => props.theme.blue}33,
@@ -15,17 +21,16 @@ const Container = styled.div`
     url(${props => props.bg});
   background-size: cover;
   background-repeat: no-repeat;
-  width: 100vw;
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   .wrapper {
     padding: 2rem;
     width: 80%;
     box-sizing: border-box;
     min-height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
     background-image: linear-gradient(
         to bottom,
         ${props => props.theme.black}ee,
@@ -34,11 +39,6 @@ const Container = styled.div`
       url(${props => props.bg});
     background-size: cover;
     background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1rem;
     .buttons {
       background: transparent;
     }
@@ -77,17 +77,17 @@ const Container = styled.div`
 
         .hollow-dots-spinner {
           background-color: ${props => props.theme.black};
-          display: ${props => (props.loading ? 'flex' : 'none')};
+          display: ${props => (props.loadingSpotify ? 'flex' : 'none')};
           flex-direction: row;
-          height: 400px;
+          height: ${props => props.height};
           width: 100%;
           align-items: center;
           justify-content: center;
         }
 
         .hollow-dots-spinner .dot {
-          width: 15px;
-          height: 15px;
+          width: 50px;
+          height: 50px;
           margin: 0 calc(15px / 2);
           border: calc(15px / 5) solid ${props => props.theme.blue};
           border-radius: 50%;
@@ -118,15 +118,44 @@ const Container = styled.div`
           }
         }
         .SpotifyPlayer {
-          display: ${props => (props.loading ? 'none' : 'auto')};
+          display: ${props => (props.loadingSpotify ? 'none' : 'auto')};
         }
       }
     }
   }
+  @media only screen and (max-width: 769px) {
+    min-height: 90vh;
+    .wrapper {
+      margin-top: 1rem;
+      background: transparent;
+      width: 100%;
+
+      .streams {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        .spotifyContainer h2,
+        .youtube h2 {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 376px) {
+    background-image: linear-gradient(
+      to bottom,
+      ${props => props.theme.black}cc,
+      ${props => props.theme.black}ff
+    );
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 `;
 
 const Stream = props => {
-  const [loading, setLoading] = useState(true);
+  const [loadingVideo, setLoadingVideo] = useState(true);
+  const [loadingSpotify, setLoadingSpotify] = useState(true);
 
   const mainFade = useSpring({
     from: {
@@ -135,6 +164,8 @@ const Stream = props => {
 
     opacity: 1,
   });
+
+  let height = window.innerHeight;
 
   return (
     <StaticQuery
@@ -148,13 +179,19 @@ const Stream = props => {
       render={data => {
         const player = {
           uri: data.contentfulAbout.songUrl,
-          size: { width: '100%', height: '400px' },
+          size: { width: '100%', height: height / 2 },
           view: 'list',
         };
 
         return (
           <animated.div style={mainFade}>
-            <Container theme={props.theme} bg={img} loading={loading}>
+            <Container
+              theme={props.theme}
+              bg={img}
+              loadingVideo={loadingVideo}
+              loadingSpotify={loadingSpotify}
+              height={height}
+            >
               <div className="wrapper">
                 <div className="streams">
                   <animated.div style={mainFade}>
@@ -164,7 +201,11 @@ const Stream = props => {
                         <div className="dot" />
                         <div className="dot" />
                       </div>
-                      <Video theme={props.theme} onLoad={setLoading} />
+                      <Video
+                        theme={props.theme}
+                        onLoad={setLoadingVideo}
+                        size={player.size}
+                      />
                     </div>
                   </animated.div>
                   <div className="spotifyContainer">
@@ -186,7 +227,7 @@ const Stream = props => {
                         size={player.size}
                         view={player.view}
                         theme={player.theme}
-                        onLoad={setLoading}
+                        onLoad={setLoadingSpotify}
                       />
                     </animated.div>
                   </div>

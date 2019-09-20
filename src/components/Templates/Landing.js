@@ -2,11 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
-import useScroll from '../Hooks/useScroll';
-
-import Tour from './Tour.js';
 
 const Container = styled.div`
   width: 100%;
@@ -34,7 +30,7 @@ const Container = styled.div`
   }
   .landing {
     width: 100%;
-    height: 70vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -49,6 +45,10 @@ const Container = styled.div`
       margin: 0.2em auto;
     }
     button {
+      :hover {
+        color: ${props => props.theme.white};
+        border: 5px solid ${props => props.theme.white};
+      }
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -56,16 +56,14 @@ const Container = styled.div`
       background-color: transparent;
       padding: 2rem;
       font-size: 2rem;
-
       font-weight: 600;
-
+      cursor: pointer;
       color: ${props => props.theme.blue};
       border: 5px solid ${props => props.theme.blue};
       border-radius: 1rem;
       span {
         margin-right: 15px;
       }
-      cursor: pointer;
     }
   }
   .bounce {
@@ -91,10 +89,41 @@ const Container = styled.div`
       transform: translateY(-15px);
     }
   }
+  @media only screen and (max-width: 769px) {
+    .landing {
+      h1 {
+        font-size: 8rem;
+      }
+    }
+  }
+  @media only screen and (max-width: 376px) {
+    .landing {
+      h1 {
+        font-size: 3.5rem;
+      }
+      button {
+        :hover {
+          border: 2px solid ${props => props.theme.white};
+        }
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        padding: 1rem;
+        font-size: 1.5rem;
+
+        border: 2px solid ${props => props.theme.blue};
+        border-radius: 1rem;
+        span {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
 `;
 
 const Landing = props => {
-  const [executeScroll, scrollHtmlAttributes] = useScroll();
   return (
     <StaticQuery
       query={graphql`
@@ -145,13 +174,7 @@ const Landing = props => {
                   <FontAwesomeIcon icon={faSpotify} transform="grow-6" />
                 </button>
               </div>
-              <div className="bounce" onClick={executeScroll}>
-                <FontAwesomeIcon icon={faArrowDown} size="6x" />
-              </div>
             </Container>
-            <div {...scrollHtmlAttributes}>
-              <Tour theme={props.theme} />
-            </div>
           </>
         );
       }}

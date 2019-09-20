@@ -1,97 +1,81 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useSpring, animated, useTrail, useTransition } from 'react-spring';
+import { useSpring, animated, useTrail } from 'react-spring';
 import { StaticQuery, graphql } from 'gatsby';
-import Bio from '../Containers/Bio';
+import BackgroundImage from 'gatsby-background-image';
+import BioContainer from '../Containers/BioContainer';
 
 const Container = styled.div`
-  background-image: linear-gradient(
-      to bottom,
-      ${props => props.theme.blue}44,
-      ${props => props.theme.blue}22
-    ),
-    url(${props => props.bg});
-  background-size: cover;
-  background-repeat: no-repeat;
   width: 100%;
-  height: 90vh;
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  grid-gap: 2rem;
-  align-content: space-around;
-  justify-content: space-between;
-  .wrapper2 {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .cardWrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     position: relative;
-    img {
-      background-image: linear-gradient(
+    padding: 3rem;
+    max-width: 960px;
+    box-sizing: border-box;
+    min-height: 45%;
+    background-image: linear-gradient(
         to bottom,
         ${props => props.theme.black}cc,
-        ${props => props.theme.black}ee,
-        ${props => props.theme.black}99
-      );
-      border-radius: 1rem;
+        ${props => props.theme.black}ff
+      ),
+      url(${props => props.bg});
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-size: 1.2rem;
+    border-radius: 1rem;
+    box-shadow: 10px 10px 5px 0px ${props => props.theme.black}99;
+    .buttons {
+      min-height: 10%;
       box-sizing: border-box;
-      max-height: 80vh;
-      max-width: 90%;
-      padding: 1rem;
-      position: absolute;
-    }
-    .wrapper {
-      padding: 2rem;
-      width: 90%;
-      box-sizing: border-box;
-      max-height: 80vh;
-      background-image: linear-gradient(
-          to bottom,
-          ${props => props.theme.black}cc,
-          ${props => props.theme.black}ee,
-          ${props => props.theme.black}99
-        ),
-        url(${props => props.bg});
-      background-size: cover;
-      background-repeat: no-repeat;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
       justify-content: center;
-      border-radius: 1rem;
-      .buttons {
-        min-height: 20%;
+      align-items: center;
+      button {
+        text-align: center;
         box-sizing: border-box;
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        justify-content: center;
-        align-items: center;
-        button {
-          text-align: center;
-          box-sizing: border-box;
-          width: 100%;
-          font-size: 1.2rem;
-          color: ${props => props.theme.white};
-          padding: 1rem;
-          cursor: pointer;
-          background-color: transparent;
-          border: none;
-          :hover {
-            color: ${props => props.theme.blue};
-            box-sizing: border-box;
-          }
-        }
-        .selected {
+        font-size: 1.4rem;
+        color: ${props => props.theme.white};
+
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        :hover {
           color: ${props => props.theme.blue};
+          box-sizing: border-box;
         }
       }
-      .about {
-        min-height: 90%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
+      .selected {
+        color: ${props => props.theme.blue};
+      }
+    }
+  }
+  @media only screen and (max-width: 376px) {
+    section::after,
+    section::before {
+      background-color: ${props => props.theme.black};
+    }
+    .cardWrapper {
+      padding: 1rem;
+      background-color: ${props => props.theme.black};
+      font-size: 1rem;
+      border-radius: 0;
+      .buttons {
+        button {
+          font-size: 1rem;
+        }
       }
     }
   }
@@ -105,13 +89,7 @@ const About = props => {
 
     opacity: 1,
   });
-  const [imgIndex, set] = useState(0);
-  const onClick = useCallback(() => set(state => (state + 1) % 3), []);
-  const transitions = useTransition(imgIndex, p => p, {
-    from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-    leave: { opacity: 0, transform: 'translate3d(50%,0,0)' },
-  });
+
   const [currentBio, setCurrentBio] = useState(0);
 
   const buttons = [
@@ -132,11 +110,6 @@ const About = props => {
         query AboutQuery {
           contentfulAbout {
             title
-            backgroundImage {
-              file {
-                url
-              }
-            }
             bios {
               name
               bio {
@@ -151,10 +124,17 @@ const About = props => {
               }
               socialLinks
               position
-              images {
+              profileImage {
                 id
-                file {
-                  url
+                fluid(quality: 100) {
+                  aspectRatio
+                  base64
+                  sizes
+                  src
+                  srcSet
+                  srcSetWebp
+                  srcWebp
+                  tracedSVG
                 }
               }
             }
@@ -162,14 +142,23 @@ const About = props => {
         }
       `}
       render={data => {
+        const imageData =
+          data.contentfulAbout.bios[currentBio].profileImage.fluid;
         return (
           <animated.div style={mainFade}>
-            <Container
-              theme={props.theme}
-              bg={data.contentfulAbout.backgroundImage.file.url}
+            <BackgroundImage
+              Tag="section"
+              fluid={imageData}
+              backgroundColor={props.theme.darkBlue}
+              fadeIn={true}
             >
-              <div className="wrapper2">
-                <div className="wrapper">
+              <Container
+                theme={props.theme}
+                bg={
+                  data.contentfulAbout.bios[currentBio].profileImage.fluid.src
+                }
+              >
+                <div className="cardWrapper">
                   <div className="buttons">
                     {trail.map((animation, index) => {
                       return (
@@ -184,31 +173,15 @@ const About = props => {
                       );
                     })}
                   </div>
-                  <animated.div className="about" style={mainFade}>
-                    <Bio
+                  <animated.div style={mainFade}>
+                    <BioContainer
                       theme={props.theme}
                       data={data.contentfulAbout.bios[currentBio]}
                     />
                   </animated.div>
                 </div>
-              </div>
-              <div className="wrapper2">
-                {transitions.map(({ item, props: animation, key }) => {
-                  return (
-                    <animated.img
-                      src={
-                        data.contentfulAbout.bios[currentBio].images[item].file
-                          .url
-                      }
-                      alt=""
-                      key={key}
-                      style={animation}
-                      onClick={onClick}
-                    />
-                  );
-                })}
-              </div>
-            </Container>
+              </Container>
+            </BackgroundImage>
           </animated.div>
         );
       }}

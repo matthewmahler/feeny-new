@@ -38,6 +38,11 @@ const Container = styled.div`
       width: 0px; /* Remove scrollbar space */
     }
   }
+  @media only screen and (max-width: 375px) {
+    .wrapper {
+      padding: 0;
+    }
+  }
 `;
 
 const Media = props => {

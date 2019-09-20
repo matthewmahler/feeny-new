@@ -10,7 +10,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  width: 100% !important;
   min-height: 90vh;
   .mediaWrapper {
     padding: 3rem;
@@ -22,7 +22,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    border-radius: 1rem;
+
     .my-masonry-grid {
       display: -webkit-box; /* Not needed if autoprefixing */
       display: -ms-flexbox; /* Not needed if autoprefixing */
@@ -101,6 +101,20 @@ const Container = styled.div`
           }
           .likes {
             font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    .mediaWrapper {
+      padding: 0;
+      margin: 1rem;
+      width: 100%;
+      .insta-container {
+        .profileImageContainer {
+          .overlay {
+            display: none;
           }
         }
       }

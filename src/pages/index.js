@@ -31,16 +31,14 @@ html{
     font-family: 'miller', "Trirong", "Montserrat", '-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica','Arial','sans-serif','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol', sans-serif; 
     overflow: scroll;
     font-size: 62.5%; 
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
     ::-webkit-scrollbar {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
 }
-  box-sizing: border-box;
-  min-width: 100vw;
-  min-height: 100vh;
-  max-width: 100vw;
-  max-height: 100vh;
-  }
+  
   h1, 
     h2, 
     h3{
@@ -63,11 +61,10 @@ html{
     }
     
   }
+}
 `;
 
 const Container = styled.div`
-  min-width: 100vw;
-  min-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -75,14 +72,6 @@ const Container = styled.div`
 
   div {
     width: 100%;
-  }
-  ::-webkit-scrollbar {
-    width: 0px; /* Remove scrollbar space */
-    background: transparent; /* Optional: just make scrollbar invisible */
-  }
-  /* Optional: show position indicator in red */
-  ::-webkit-scrollbar-thumb {
-    background: #ff0000;
   }
 `;
 

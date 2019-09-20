@@ -54,9 +54,20 @@ const Container = styled.div`
       }
     }
   }
-  @media all and (max-width: 575px) {
+  @media only screen and (max-width: 575px) {
     font-size: 1rem;
   }
+  @media only screen and (max-width: 375px) {
+    .parent {
+      a {
+        .grid {
+          .link {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }}
 `;
 
 const ShowList = props => {

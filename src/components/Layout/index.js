@@ -20,7 +20,7 @@ function Layout({ children }, props) {
             <html lang="en" />
           </Helmet>
 
-          <div>{children}</div>
+          <div id="outer-container">{children}</div>
         </>
       )}
     />
