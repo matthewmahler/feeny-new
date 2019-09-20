@@ -19,7 +19,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: flex-start;
     position: relative;
-    padding: 3rem;
+    padding: 2rem;
     max-width: 960px;
     box-sizing: border-box;
     min-height: 45%;
@@ -35,7 +35,6 @@ const Container = styled.div`
     border-radius: 1rem;
     box-shadow: 10px 10px 5px 0px ${props => props.theme.black}99;
     .buttons {
-      min-height: 10%;
       box-sizing: border-box;
       width: 100%;
       display: grid;
@@ -160,18 +159,17 @@ const About = props => {
               >
                 <div className="cardWrapper">
                   <div className="buttons">
-                    {trail.map((animation, index) => {
+                    {buttons.map((button, index) => {
                       return (
-                        <animated.div style={animation} key={index}>
-                          <button
-                            onClick={() => setCurrentBio(index)}
-                            className={currentBio === index ? 'selected' : null}
-                          >
-                            {buttons[index].text}
-                          </button>
-                        </animated.div>
+                        <button
+                          onClick={() => setCurrentBio(index)}
+                          className={currentBio === index ? 'selected' : null}
+                        >
+                          {button.text}
+                        </button>
                       );
                     })}
+                    ); })}
                   </div>
                   <animated.div style={mainFade}>
                     <BioContainer
