@@ -4,6 +4,7 @@ import { useSpring, animated } from 'react-spring';
 import { StaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import BioContainer from '../Containers/BioContainer';
+import { useWindowSize } from '../Hooks/useWindowSize';
 
 const Container = styled.div`
   width: 100%;
@@ -89,8 +90,7 @@ const About = props => {
     opacity: 1,
   });
 
-  let height = window.innerHeight;
-  let width = window.innerWidth;
+  let [width, height] = useWindowSize();
 
   const [currentBio, setCurrentBio] = useState(0);
 
@@ -176,12 +176,12 @@ const About = props => {
                         <button
                           onClick={() => setCurrentBio(index)}
                           className={currentBio === index ? 'selected' : null}
+                          key={index}
                         >
                           {button.text}
                         </button>
                       );
                     })}
-                    ); })}
                   </div>
                   <animated.div style={mainFade}>
                     <BioContainer

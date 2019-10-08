@@ -13,6 +13,7 @@ const Container = styled.nav`
   position: sticky;
   z-index: 100;
   h1 {
+    width: auto;
     font-family: 'miller';
     font-style: italic;
     font-size: 4rem;
@@ -26,8 +27,10 @@ const Container = styled.nav`
     margin: 0;
     padding-left: 3rem;
     height: 100%;
-    cursor: pointer;
     letter-spacing: 5px;
+    span {
+      cursor: pointer;
+    }
   }
   .buttons {
     padding-right: 2rem;
@@ -75,7 +78,7 @@ const Container = styled.nav`
         button {
           margin: 0 1rem;
           text-align: center;
-          font-size: 1rem;
+          font-size: 1.2rem;
           padding-bottom: 0.5rem;
         }
       }
@@ -110,8 +113,8 @@ const Nav = props => {
 
   return (
     <Container theme={props.theme} id="page-wrap">
-      <animated.h1 style={slideRight} onClick={() => props.changePage(0)}>
-        F E E N Y
+      <animated.h1 style={slideRight}>
+        <span onClick={() => props.changePage(0)}>F E E N Y</span>
       </animated.h1>
 
       <div className="buttons">

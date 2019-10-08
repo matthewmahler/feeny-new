@@ -23,20 +23,20 @@ const Video = props => {
 
   return (
     <Container theme={props.theme} loading={loading}>
-      <h2>
-        <span>Latest Video</span>
-      </h2>
-      <iframe
-        title="youtube"
-        width="100%"
-        height={props.size.height}
-        src={`https://www.youtube.com/embed/${
-          loading ? '' : data.items[0].id.videoId
-        }`}
-        frameBorder="0"
-        allowFullScreen
-        onLoad={() => props.onLoad(loading)}
-      />
+      {loading ? (
+        '...Loading...'
+      ) : (
+        <iframe
+          title="youtube"
+          width={props.size.width}
+          height={props.size.height}
+          src={`https://www.youtube.com/embed/${
+            loading ? '' : data.items[0].id.videoId
+          }`}
+          frameBorder="0"
+          allowFullScreen
+        />
+      )}
     </Container>
   );
 };

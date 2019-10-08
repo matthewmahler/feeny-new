@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import { useWindowSize } from '../Hooks/useWindowSize';
 
 const Container = styled.div`
   width: 100%;
@@ -13,6 +14,7 @@ const Container = styled.div`
   justify-content: center;
 
   .full-bg {
+    display: ${props => (props.height > props.width ? 'none' : 'auto')};
     position: fixed;
     top: 0;
     right: 0;
@@ -29,6 +31,15 @@ const Container = styled.div`
     }
   }
   .landing {
+    background-image: linear-gradient(
+        to bottom,
+        ${props => props.theme.black}aa,
+        ${props => props.theme.black}aa
+      ),
+      ${props =>
+        props.height > props.width ? 'url(' + props.bg + ')' : 'none'};
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 100%;
     height: 100%;
     display: flex;
@@ -61,34 +72,9 @@ const Container = styled.div`
       color: ${props => props.theme.blue};
       border: 5px solid ${props => props.theme.blue};
       border-radius: 1rem;
-      span {
-        margin-right: 15px;
-      }
     }
   }
-  .bounce {
-    width: 100%;
-    text-align: center;
-    color: ${props => props.theme.white};
-    -moz-animation: bounce 2s infinite;
-    -webkit-animation: bounce 2s infinite;
-    animation: bounce 2s infinite;
-  }
-  @keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-30px);
-    }
-    60% {
-      transform: translateY(-15px);
-    }
-  }
+
   @media only screen and (max-width: 769px) {
     .landing {
       h1 {
@@ -115,15 +101,13 @@ const Container = styled.div`
 
         border: 2px solid ${props => props.theme.blue};
         border-radius: 1rem;
-        span {
-          margin-right: 1rem;
-        }
       }
     }
   }
 `;
 
 const Landing = props => {
+  let [width, height] = useWindowSize();
   return (
     <StaticQuery
       query={graphql`
@@ -131,6 +115,11 @@ const Landing = props => {
           contentfulLanding {
             title
             backgroundVideo {
+              file {
+                url
+              }
+            }
+            backgroundImage {
               file {
                 url
               }
@@ -149,15 +138,20 @@ const Landing = props => {
         }
       `}
       render={data => {
+        const portrait = data.contentfulLanding.backgroundImage.file.url;
+        const landscape = data.contentfulLanding.backgroundVideo.file.url;
+
         return (
           <>
-            <Container theme={props.theme}>
+            <Container
+              theme={props.theme}
+              width={width}
+              height={height}
+              bg={portrait}
+            >
               <div className="full-bg">
                 <video autoPlay muted loop>
-                  <source
-                    src={data.contentfulLanding.backgroundVideo.file.url}
-                    type="video/mp4"
-                  />
+                  <source src={landscape} type="video/mp4" />
                 </video>
               </div>
               <div className="landing">
@@ -170,8 +164,12 @@ const Landing = props => {
                     )
                   }
                 >
-                  <span> Listen Now On Spotify </span>
-                  <FontAwesomeIcon icon={faSpotify} transform="grow-6" />
+                  <span>Listen Now On Spotify</span>
+                  <FontAwesomeIcon
+                    icon={faSpotify}
+                    transform="grow-6"
+                    style={{ marginLeft: '10px' }}
+                  />
                 </button>
               </div>
             </Container>

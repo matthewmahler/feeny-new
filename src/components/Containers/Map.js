@@ -17,19 +17,26 @@ const MapComponent = compose(
   withScriptjs,
   withGoogleMap
 )(props => (
-  <GoogleMap defaultZoom={7} defaultCenter={{ lat: 41.492, lng: -74.901 }}>
+  <GoogleMap defaultZoom={9} defaultCenter={{ lat: 40.492, lng: -74.901 }}>
     {props.isMarkerShown && props.data ? (
       props.data.map((marker, i) => {
-        return (
-          <Marker
-            key={i}
-            position={{
-              lat: parseInt(marker.venue.latitude),
-              lng: parseInt(marker.venue.longitude),
-            }}
-            onClick={() => window.open(marker.url, '_blank')}
-          />
-        );
+        if (marker.place.location) {
+          return (
+            <Marker
+              key={i}
+              position={{
+                lat: marker.place.location.latitude,
+                lng: marker.place.location.longitude,
+              }}
+              onClick={() =>
+                window.open(
+                  `https://www.facebook.com/events/${marker.id}`,
+                  '_blank'
+                )
+              }
+            />
+          );
+        }
       })
     ) : (
       <div />

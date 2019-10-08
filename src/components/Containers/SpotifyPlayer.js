@@ -20,7 +20,6 @@ const SpotifyPlayer = props => {
       src={
         'https://embed.spotify.com/?uri=' + props.uri + '&view=' + props.view
       }
-      onLoad={() => props.onLoad(false)}
     />
   );
 };
