@@ -47,7 +47,9 @@ const Merch = props => {
 
   useEffect(() => {
     const baseURL = 'https://feeny.bandcamp.com';
-    axios.get('https://feeny.bandcamp.com/merch').then(response => {
+    var cors = 'https://cors-anywhere.herokuapp.com/';
+
+    axios.get(cors + 'https://feeny.bandcamp.com/merch').then(response => {
       const $ = cheerio.load(response.data);
 
       const urlElems = $('li.merch-grid-item');
