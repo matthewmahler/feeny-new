@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ShowList from '../Containers/ShowList';
 import Map from '../Containers/Map';
@@ -82,9 +82,10 @@ const Container = styled.div`
 const Tour = props => {
   const url = `https://graph.facebook.com/v4.0/me?fields=events%7Bname%2Cstart_time%2Cplace%2Cid%7D&access_token=${process.env.GATSBY_FACEBOOK_ACCESS_TOKEN}`;
   const [data, loading] = useFetch(url);
+  console.log(data);
 
   let filtered;
-  if (!loading && data) {
+  if (!loading && data && !data.error) {
     filtered = data.events.data.filter(event => {
       return moment() < moment(event.start_time);
     });
@@ -92,7 +93,7 @@ const Tour = props => {
   return (
     <Container id="tour" theme={props.theme} bg={props.bg}>
       <div className="wrapper">
-        {loading === false && filtered.length < 1 ? (
+        {data.error || (loading === false && filtered.length < 1) ? (
           <h1>More Shows TBA</h1>
         ) : (
           <>

@@ -9,7 +9,7 @@ const Container = styled.div`
   justify-content: center;
 
   iframe {
-    display: ${props => (props.loading ? 'none' : 'auto')};
+    display: ${props => (props.isLoading ? 'none' : 'auto')};
   }
   @media all and (max-width: 1200px) {
     padding-right: 0;
@@ -22,7 +22,7 @@ const Video = props => {
   );
 
   return (
-    <Container theme={props.theme} loading={loading}>
+    <Container theme={props.theme} isLoading={loading}>
       {loading ? (
         '...Loading...'
       ) : (
