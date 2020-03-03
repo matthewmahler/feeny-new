@@ -5,8 +5,8 @@ const Container = styled.div`
   overflow: auto;
   display: flex;
   flex-direction: column;
-  align-content: center;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
   text-align: center;
 
   div {

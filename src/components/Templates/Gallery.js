@@ -1,7 +1,7 @@
 import React from 'react';
-import { StaticQuery, graphql } from 'gatsby';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
+import { useFetch } from '../Hooks/useFetch';
 
 import MediaWrapper from '../Containers/MediaWrapper';
 import img from '../../images/casey-horner-1sim8ojvCbE-unsplash.jpg';
@@ -18,6 +18,8 @@ const Container = styled.div`
   min-height: 90vh;
   overflow: auto;
   .wrapper {
+    height: 100vh;
+    overflow: scroll;
     .buttons {
       background: transparent;
     }
@@ -55,55 +57,19 @@ const Media = props => {
   });
 
   return (
-    <StaticQuery
-      query={query}
-      render={data => {
-        const media = data.allInstagramContent.edges;
-        return (
-          <Container theme={props.theme}>
-            <animated.div className="wrapper" style={mainFade}>
-              <MediaWrapper media={media} theme={props.theme} />
-            </animated.div>
-          </Container>
-        );
-      }}
-    />
+    <Container theme={props.theme}>
+      {props.loading ? (
+        'loading'
+      ) : (
+        <animated.div className="wrapper" style={mainFade}>
+          <MediaWrapper media={props.media} theme={props.theme} />
+        </animated.div>
+      )}
+    </Container>
   );
 };
 
 export default Media;
-
-const query = graphql`
-  query {
-    allInstagramContent(limit: 24) {
-      edges {
-        node {
-          link
-          type
-          comments {
-            count
-          }
-          likes {
-            count
-          }
-          caption {
-            text
-          }
-          videos {
-            standard_resolution {
-              url
-            }
-          }
-          images {
-            standard_resolution {
-              url
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 // wait till all images are loading before fading in the background
 // possibly using gatsby-background-image

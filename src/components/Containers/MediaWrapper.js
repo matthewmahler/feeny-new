@@ -150,7 +150,7 @@ const MediaWrapper = props => {
           columnClassName="my-masonry-grid_column"
         >
           {trail.map((animation, i) => {
-            return props.media[i].node.videos == null ? (
+            return props.media[i].media_type !== 'VIDEO' ? (
               <animated.div key={i} style={animation}>
                 <InstagramPhoto key={i}>
                   <div
@@ -159,10 +159,7 @@ const MediaWrapper = props => {
                     onMouseOut={() => setHovered(null)}
                     key={i}
                   >
-                    <img
-                      src={props.media[i].node.images.standard_resolution.url}
-                      alt=""
-                    />
+                    <img src={props.media[i].media_url} alt="" />
                     <div
                       className="overlay"
                       style={{
@@ -172,16 +169,12 @@ const MediaWrapper = props => {
                     >
                       <p>
                         <a
-                          href={props.media[i].node.link}
+                          href={props.media[i].permalink}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {props.media[i].node.caption.text}
+                          {props.media[i].caption}
                         </a>
-                      </p>
-
-                      <p className="likes">
-                        {props.media[i].node.likes.count} Likes
                       </p>
                     </div>
                   </div>
@@ -196,10 +189,7 @@ const MediaWrapper = props => {
                     onMouseOut={() => setHovered(null)}
                     key={i}
                   >
-                    <video
-                      src={props.media[i].node.videos.standard_resolution.url}
-                      controls
-                    />
+                    <video src={props.media[i].media_url} controls />
                     <div
                       className="overlay"
                       style={{
@@ -209,15 +199,13 @@ const MediaWrapper = props => {
                     >
                       <p>
                         <a
-                          href={props.media[i].node.link}
+                          href={props.media[i].permalink}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {props.media[i].node.caption.text}
+                          {props.media[i].caption}
                         </a>
                       </p>
-
-                      <p>{props.media[i].node.likes.count} Likes</p>
                     </div>
                   </div>
                 </InstagramVideo>

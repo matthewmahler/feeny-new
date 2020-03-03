@@ -132,7 +132,12 @@ const Stream = props => {
                   </div>
 
                   <div className="youtube">
-                    <Video theme={props.theme} size={youtubePlayer.size} />
+                    <Video
+                      video={props.video}
+                      loading={props.loading}
+                      theme={props.theme}
+                      size={youtubePlayer.size}
+                    />
                   </div>
                 </div>
               </div>

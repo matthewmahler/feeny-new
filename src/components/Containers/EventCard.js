@@ -89,13 +89,13 @@ const EventCard = props => {
         <span className="name">{props.show.name}</span>
         <span className="time">
           {moment(props.show.start_time).format('h A')}{' '}
-          {props.show.place.location ? (
+          {props.show.place && props.show.place.location ? (
             <span className="location">
               {props.show.place.location.city},{' '}
               {props.show.place.location.state}
             </span>
           ) : (
-            <span className="location">{props.show.place.name}</span>
+            <span className="location">TBA</span>
           )}
         </span>
 

@@ -20,7 +20,12 @@ const MapComponent = compose(
   <GoogleMap defaultZoom={9} defaultCenter={{ lat: 40.492, lng: -74.901 }}>
     {props.isMarkerShown && props.data ? (
       props.data.map((marker, i) => {
-        if (marker.place.location) {
+        if (
+          marker.place &&
+          marker.place.location &&
+          marker.place.location.latitude &&
+          marker.place.location.longitude
+        ) {
           return (
             <Marker
               key={i}

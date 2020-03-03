@@ -9,6 +9,9 @@ const SpotifyPlayer = props => {
 
     opacity: 1,
   });
+  const src =
+    'https://embed.spotify.com/?uri=' + props.uri + '&view=' + props.view;
+  console.log(props.uri);
   return (
     <animated.iframe
       style={mainFade}
@@ -17,9 +20,7 @@ const SpotifyPlayer = props => {
       width={props.size.width}
       height={props.size.height}
       frameBorder="0"
-      src={
-        'https://embed.spotify.com/?uri=' + props.uri + '&view=' + props.view
-      }
+      src={src}
     />
   );
 };

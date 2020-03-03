@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ShowList from '../Containers/ShowList';
 import Map from '../Containers/Map';
-import { useFetch } from '../Hooks/useFetch';
-import moment from 'moment';
 
 const Container = styled.div`
   width: 100vw;
@@ -80,35 +78,26 @@ const Container = styled.div`
 `;
 
 const Tour = props => {
-  const url = `https://graph.facebook.com/v4.0/me?fields=events%7Bname%2Cstart_time%2Cplace%2Cid%7D&access_token=${process.env.GATSBY_FACEBOOK_ACCESS_TOKEN}`;
-  const [data, loading] = useFetch(url);
-  console.log(data);
-
-  let filtered;
-  if (!loading && data && !data.error) {
-    filtered = data.events.data.filter(event => {
-      return moment() < moment(event.start_time);
-    });
-  }
   return (
     <Container id="tour" theme={props.theme} bg={props.bg}>
       <div className="wrapper">
-        {data.error || (loading === false && filtered.length < 1) ? (
+        {props.events.error ||
+        (props.loading === false && props.events.length < 1) ? (
           <h1>More Shows TBA</h1>
         ) : (
           <>
             <div className="tour">
-              {loading ? (
+              {props.loading ? (
                 <h1>Loading...</h1>
               ) : (
-                <ShowList data={filtered} theme={props.theme} />
+                <ShowList data={props.events.reverse()} theme={props.theme} />
               )}
             </div>
             <div className="map">
-              {loading ? (
+              {props.loading ? (
                 <h1>Loading...</h1>
               ) : (
-                <Map data={filtered} theme={props.theme} />
+                <Map data={props.events} theme={props.theme} />
               )}
             </div>
           </>

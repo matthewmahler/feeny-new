@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
 import styled from 'styled-components';
-import cheerio from 'cheerio';
-import axios from 'axios';
+
 import Product from '../Containers/Product';
 import { useWindowSize } from '../Hooks/useWindowSize';
 
@@ -41,54 +40,8 @@ const Container = styled.div`
 `;
 
 const Merch = props => {
-  const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState([]);
   let [width, height] = useWindowSize();
 
-  useEffect(() => {
-    const baseURL = 'https://feeny.bandcamp.com';
-    var cors = 'https://cors-anywhere.herokuapp.com/';
-
-    axios.get(cors + 'https://feeny.bandcamp.com/merch').then(response => {
-      const $ = cheerio.load(response.data);
-
-      const urlElems = $('li.merch-grid-item');
-      console.log(urlElems);
-      // We now loop through all the elements found
-      for (let i = 0; i < urlElems.length; i++) {
-        let product = {
-          id: i,
-          name: null,
-          image: null,
-          price: null,
-          url: null,
-        };
-        const name = $(urlElems[i]).find('p.title');
-        const image = $(urlElems[i]).find('img');
-        const price = $(urlElems[i]).find('span.price');
-        const url = $(urlElems[i]).find('a');
-
-        if (name && image && price && url) {
-          product.name = $(name)
-            .text()
-            .trim();
-
-          product.image = $(image).attr('src');
-
-          product.price = $(price)
-            .text()
-            .trim();
-          product.url = baseURL + $(url).attr('href');
-        }
-        console.log(product);
-        setProducts(oldArray => [...oldArray, product]);
-
-        if (i === urlElems.length - 1) {
-          setLoading(false);
-        }
-      }
-    });
-  }, []);
   return (
     <StaticQuery
       query={graphql`
@@ -133,11 +86,11 @@ const Merch = props => {
             fadeIn={true}
           >
             <Container theme={props.theme}>
-              {loading ? (
+              {props.loading ? (
                 <h1>Loading</h1>
               ) : (
                 <div className="wrapper">
-                  {products.map((product, i) => {
+                  {props.products.map((product, i) => {
                     return (
                       <Product product={product} key={i} theme={props.theme} />
                     );
