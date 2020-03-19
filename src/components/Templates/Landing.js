@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpotify } from '@fortawesome/free-brands-svg-icons';
+import { faSpotify, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { useWindowSize } from '../Hooks/useWindowSize';
 
 const Container = styled.div`
@@ -114,6 +114,8 @@ const Landing = props => {
         query LandingQuery {
           contentfulLanding {
             title
+            ctaText
+            ctaLink
             backgroundVideo {
               file {
                 url
@@ -155,18 +157,21 @@ const Landing = props => {
                 </video>
               </div>
               <div className="landing">
-                <h1>Are You Leaving?</h1>
+                <h1>{data.contentfulLanding.ctaText}</h1>
                 <button
-                  onClick={() =>
-                    window.open(
-                      'https://open.spotify.com/artist/4TWQJppHQYlY4FlzuvEDUc',
-                      '_blank'
-                    )
-                  }
+                  onClick={() => window.open(data.contentfulLanding.ctaLink)}
                 >
-                  <span>Listen Now On Spotify</span>
+                  <span>
+                    {data.contentfulLanding.ctaLink.includes('youtube')
+                      ? 'Watch Now on Youtube'
+                      : 'Listen Now On Spotify'}
+                  </span>
                   <FontAwesomeIcon
-                    icon={faSpotify}
+                    icon={
+                      data.contentfulLanding.ctaLink.includes('youtube')
+                        ? faYoutube
+                        : faSpotify
+                    }
                     transform="grow-6"
                     style={{ marginLeft: '10px' }}
                   />
