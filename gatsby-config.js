@@ -48,12 +48,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-instagram-all`,
-      options: {
-        access_token: '1138377695.1677ed0.acb18b85ca934d08a7c596094c6c2d18',
-      },
-    },
-    {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [`Trirong`, `Montserrat`],
