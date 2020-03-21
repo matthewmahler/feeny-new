@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
-import { useFetch } from '../Hooks/useFetch';
 
 import MediaWrapper from '../Containers/MediaWrapper';
 import img from '../../images/casey-horner-1sim8ojvCbE-unsplash.jpg';
