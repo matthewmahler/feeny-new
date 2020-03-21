@@ -80,7 +80,7 @@ const Product = ({ product, theme }) => {
   return (
     <Container theme={theme}>
       <div className="product">
-        <a href={product.url}>
+        <a href={product.url} target="_blank">
           <img src={product.image} alt={product.name} />
           <p className="name">{product.name}</p>
           <div className="price">
