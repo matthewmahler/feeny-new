@@ -60,7 +60,7 @@ const Container = styled.nav`
     display: flex;
     flex-direction: column;
     h1 {
-      padding: 0;
+      margin: 0;
       font-size: 2.5rem;
     }
     .buttons {
@@ -69,7 +69,7 @@ const Container = styled.nav`
       flex-direction: row;
       align-items: center;
       justify-content: center;
-      padding-right: 0;
+      margin-right: 0;
       div {
         display: flex;
         flex-direction: column;
