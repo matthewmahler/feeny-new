@@ -23,7 +23,7 @@ const Container = styled.div`
   flex-direction: column;
   align-content: center;
   justify-content: space-between;
-  color: ${props => props.theme.lightGray};
+  color: ${(props) => props.theme.lightGray};
 
   .wrapper {
     width: 100%;
@@ -40,7 +40,7 @@ const Container = styled.div`
       text-align: center;
       grid-column-end: span 2;
       a {
-        color: ${props => props.theme.white};
+        color: ${(props) => props.theme.white};
         margin: 1rem;
       }
     }
@@ -61,6 +61,14 @@ const Container = styled.div`
       p {
         width: 80%;
         margin: 1em auto;
+        a {
+          text-decoration: none;
+          color: ${(props) => props.theme.blue};
+          font-weight: bold;
+          :hover {
+            filter: brightness(1.3);
+          }
+        }
       }
     }
     .socials {
@@ -71,7 +79,7 @@ const Container = styled.div`
       justify-content: center;
       text-align: center;
       a {
-        color: ${props => props.theme.white};
+        color: ${(props) => props.theme.white};
         margin: 1rem;
       }
     }
@@ -79,15 +87,15 @@ const Container = styled.div`
   h1 {
     font-size: 3rem;
     padding: 0;
-    color: ${props => props.theme.white};
-    border-bottom: 3px solid ${props => props.theme.blue};
+    color: ${(props) => props.theme.white};
+    border-bottom: 3px solid ${(props) => props.theme.blue};
     text-align: center;
     margin: 0 auto;
   }
   h2 {
     font-size: 2rem;
     margin: 0 auto;
-    color: ${props => props.theme.white};
+    color: ${(props) => props.theme.white};
     text-align: center;
   }
   @media only screen and (max-width: 420px) {
@@ -105,7 +113,7 @@ const Container = styled.div`
   }
 `;
 
-const BioContainer = props => {
+const BioContainer = (props) => {
   const mainFade = useSpring({
     from: {
       opacity: 0,
