@@ -53,7 +53,8 @@ html{
   body {
     margin:0;
     font-family: "Montserrat";
-    
+    scrollbar-color: transparent transparent;
+
   }
   @media all and (max-width: 1200px) {
     width: 100%
@@ -107,7 +108,7 @@ const HomePage = () => {
 
   let filteredEvents;
   if (!showsLoading && shows && !shows.error) {
-    filteredEvents = shows.events.data.filter(event => {
+    filteredEvents = shows.events.data.filter((event) => {
       return moment() < moment(event.start_time);
     });
   }
@@ -119,7 +120,7 @@ const HomePage = () => {
     const baseURL = 'https://feeny.bandcamp.com';
     var cors = 'https://cors-anywhere.herokuapp.com/';
 
-    axios.get(cors + 'https://feeny.bandcamp.com/merch').then(response => {
+    axios.get(cors + 'https://feeny.bandcamp.com/merch').then((response) => {
       const $ = cheerio.load(response.data);
 
       const urlElems = $('li.merch-grid-item');
@@ -138,18 +139,14 @@ const HomePage = () => {
         const url = $(urlElems[i]).find('a');
 
         if (name && image && price && url) {
-          product.name = $(name)
-            .text()
-            .trim();
+          product.name = $(name).text().trim();
 
           product.image = $(image).attr('src');
 
-          product.price = $(price)
-            .text()
-            .trim();
+          product.price = $(price).text().trim();
           product.url = baseURL + $(url).attr('href');
         }
-        setProducts(oldArray => [...oldArray, product]);
+        setProducts((oldArray) => [...oldArray, product]);
 
         if (i === urlElems.length - 1) {
           setProductsLoading(false);

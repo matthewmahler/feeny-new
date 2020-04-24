@@ -9,9 +9,10 @@ const Container = styled.nav`
   grid-template-columns: 2fr 1fr;
   align-items: center;
   justify-content: center;
-  background-color: ${props => props.theme.black};
+  background-color: ${(props) => props.theme.black};
   position: sticky;
   z-index: 100;
+  box-sizing: border-box;
   h1 {
     width: auto;
     font-family: 'miller';
@@ -22,10 +23,10 @@ const Container = styled.nav`
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    color: ${props => props.theme.white};
+    color: ${(props) => props.theme.white};
     box-sizing: border-box;
     margin: 0;
-    padding-left: 3rem;
+    margin-left: 3rem;
     height: 100%;
     letter-spacing: 5px;
     span {
@@ -33,25 +34,24 @@ const Container = styled.nav`
     }
   }
   .buttons {
-    padding-right: 2rem;
+    margin-right: 2rem;
     box-sizing: border-box;
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 2rem;
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-around;
     div button {
       box-sizing: border-box;
       width: 90%;
       font-size: 1.5rem;
-      color: ${props => props.theme.white};
-      padding: 0.5em 0;
+      color: ${(props) => props.theme.white};
+      padding: 0;
       cursor: pointer;
       background-color: transparent;
       border: none;
       :hover {
-        color: ${props => props.theme.blue};
+        color: ${(props) => props.theme.blue};
       }
     }
   }
@@ -86,7 +86,7 @@ const Container = styled.nav`
   }
 `;
 
-const Nav = props => {
+const Nav = (props) => {
   const buttons = [
     { text: 'Home' },
     { text: 'About' },

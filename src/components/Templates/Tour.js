@@ -4,32 +4,39 @@ import ShowList from '../Containers/ShowList';
 import Map from '../Containers/Map';
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url(${props => props.bg});
+  background-image: url(${(props) => props.bg});
   background-size: cover;
   background-repeat: no-repeat;
   box-sizing: border-box;
   .wrapper {
-    padding: 2rem;
+    margin-top: 2rem;
     box-sizing: border-box;
     min-height: 90vh;
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 1rem;
-
-    h1 {
-      padding: 4rem;
-      font-size: 2.5vw;
-      border-radius: 1rem;
-      color: ${props => props.theme.white};
-      background-color: ${props => props.theme.black}ee;
-      box-shadow: 5px 5px 5px 0px ${props => props.theme.grey};
+    .tba {
+      grid-column: 2 / span 3;
+      width: 50%;
+      h1 {
+        width: auto;
+        height: auto;
+        padding: 4rem;
+        font-size: 2.5vw;
+        border-radius: 1rem;
+        color: ${(props) => props.theme.white};
+        background-color: ${(props) => props.theme.black}ee;
+        box-shadow: 5px 5px 5px 0px ${(props) => props.theme.grey};
+        text-align: center;
+      }
     }
+
     .tour,
     .map {
       display: flex;
@@ -38,6 +45,8 @@ const Container = styled.div`
       justify-content: flex-start;
       box-sizing: border-box;
       width: 100%;
+      height: 80vh;
+      overflow-y: scroll;
     }
   }
   @media only screen and (max-width: 769px) {
@@ -62,12 +71,11 @@ const Container = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     .tour,
     .map {
-      margin: 2rem;
       width: 100%;
       padding: 0;
     }
@@ -77,13 +85,15 @@ const Container = styled.div`
   }
 `;
 
-const Tour = props => {
+const Tour = (props) => {
   return (
     <Container id="tour" theme={props.theme} bg={props.bg}>
       <div className="wrapper">
         {props.events.error ||
         (props.loading === false && props.events.length < 1) ? (
-          <h1>More Shows TBA</h1>
+          <div className="tba">
+            <h1>More Shows TBA</h1>
+          </div>
         ) : (
           <>
             <div className="tour">

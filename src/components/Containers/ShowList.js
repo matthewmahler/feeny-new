@@ -8,7 +8,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-y: scroll;
 
   font-size: 1.5rem;
@@ -17,7 +17,7 @@ const Container = styled.div`
   }
   .grid {
     box-sizing: border-box;
-    width: 95%;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
@@ -35,7 +35,7 @@ const Container = styled.div`
   }
 `;
 
-const ShowList = props => {
+const ShowList = (props) => {
   return (
     <Container theme={props.theme}>
       <div className="grid">
