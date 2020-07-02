@@ -8,10 +8,10 @@ const Container = styled.a`
   display: grid;
   grid-template-columns: 1fr 6fr;
   grid-gap: 0.5rem;
-  background-color: ${props => props.theme.white.concat(props.opac)};
-  color: ${props => props.theme.black};
+  background-color: ${(props) => props.theme.white.concat(props.opac)};
+  color: ${(props) => props.theme.black};
   padding: 1.5rem;
-  box-shadow: 5px 5px 5px 0px ${props => props.theme.black};
+  box-shadow: 5px 5px 5px 0px ${(props) => props.theme.black};
   min-height: 125px;
   div {
     display: flex;
@@ -42,7 +42,7 @@ const Container = styled.a`
       display: flex;
       align-items: center;
       width: 100%;
-      color: ${props => props.theme.darkBlue};
+      color: ${(props) => props.theme.darkBlue};
       font-size: 1.5rem;
       font-weight: 900;
     }
@@ -66,7 +66,7 @@ const Container = styled.a`
   }
 `;
 
-const EventCard = props => {
+const EventCard = (props) => {
   const opac = (255 - props.i * 6).toString(16);
   return (
     <Container
@@ -80,9 +80,7 @@ const EventCard = props => {
           {moment(props.show.start_time).format('MMM D')}
         </span>
         <span className="day">
-          {moment(props.show.start_time)
-            .format('ddd')
-            .toLocaleUpperCase()}
+          {moment(props.show.start_time).format('ddd').toLocaleUpperCase()}
         </span>
       </div>
       <div className="info">
@@ -99,7 +97,7 @@ const EventCard = props => {
           )}
         </span>
 
-        <button>✓ Going</button>
+        <button id={props.show.id}>✓ Going</button>
       </div>
     </Container>
   );

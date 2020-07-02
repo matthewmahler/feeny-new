@@ -121,7 +121,10 @@ const Nav = (props) => {
         {trail.map((animation, index) => {
           return (
             <animated.div style={animation} key={index}>
-              <button onClick={() => props.changePage(index)}>
+              <button
+                id={buttons[index].text}
+                onClick={() => props.changePage(index)}
+              >
                 {buttons[index].text}
               </button>
             </animated.div>

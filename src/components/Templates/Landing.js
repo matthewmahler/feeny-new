@@ -14,7 +14,7 @@ const Container = styled.div`
   justify-content: center;
 
   .full-bg {
-    display: ${props => (props.height > props.width ? 'none' : 'auto')};
+    display: ${(props) => (props.height > props.width ? 'none' : 'auto')};
     position: fixed;
     top: 0;
     right: 0;
@@ -33,10 +33,10 @@ const Container = styled.div`
   .landing {
     background-image: linear-gradient(
         to bottom,
-        ${props => props.theme.black}aa,
-        ${props => props.theme.black}aa
+        ${(props) => props.theme.black}aa,
+        ${(props) => props.theme.black}aa
       ),
-      ${props =>
+      ${(props) =>
         props.height > props.width ? 'url(' + props.bg + ')' : 'none'};
     background-size: cover;
     background-repeat: no-repeat;
@@ -52,13 +52,13 @@ const Container = styled.div`
       font-size: 10rem;
 
       font-weight: 300;
-      color: ${props => props.theme.white};
+      color: ${(props) => props.theme.white};
       margin: 0.2em auto;
     }
     button {
       :hover {
-        color: ${props => props.theme.white};
-        border: 5px solid ${props => props.theme.white};
+        color: ${(props) => props.theme.white};
+        border: 5px solid ${(props) => props.theme.white};
       }
       display: flex;
       flex-direction: row;
@@ -69,8 +69,8 @@ const Container = styled.div`
       font-size: 2rem;
       font-weight: 600;
       cursor: pointer;
-      color: ${props => props.theme.blue};
-      border: 5px solid ${props => props.theme.blue};
+      color: ${(props) => props.theme.blue};
+      border: 5px solid ${(props) => props.theme.blue};
       border-radius: 1rem;
     }
   }
@@ -89,7 +89,7 @@ const Container = styled.div`
       }
       button {
         :hover {
-          border: 2px solid ${props => props.theme.white};
+          border: 2px solid ${(props) => props.theme.white};
         }
         display: flex;
         flex-direction: row;
@@ -99,14 +99,14 @@ const Container = styled.div`
         padding: 1rem;
         font-size: 1.5rem;
 
-        border: 2px solid ${props => props.theme.blue};
+        border: 2px solid ${(props) => props.theme.blue};
         border-radius: 1rem;
       }
     }
   }
 `;
 
-const Landing = props => {
+const Landing = (props) => {
   let [width, height] = useWindowSize();
   return (
     <StaticQuery
@@ -139,7 +139,7 @@ const Landing = props => {
           }
         }
       `}
-      render={data => {
+      render={(data) => {
         const portrait = data.contentfulLanding.backgroundImage.file.url;
         const landscape = data.contentfulLanding.backgroundVideo.file.url;
 
@@ -159,6 +159,7 @@ const Landing = props => {
               <div className="landing">
                 <h1>{data.contentfulLanding.ctaText}</h1>
                 <button
+                  id="landingSpotifyButton"
                   onClick={() => window.open(data.contentfulLanding.ctaLink)}
                 >
                   <span>

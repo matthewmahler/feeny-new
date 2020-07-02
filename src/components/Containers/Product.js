@@ -14,12 +14,12 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: ${props => props.theme.black}dd;
-    box-shadow: 5px 5px 5px 0px ${props => props.theme.white}88;
+    background-color: ${(props) => props.theme.black}dd;
+    box-shadow: 5px 5px 5px 0px ${(props) => props.theme.white}88;
     border-radius: 20px;
     :hover {
       transition: 0.2s;
-      box-shadow: 10px 10px 10px 0px ${props => props.theme.blue};
+      box-shadow: 10px 10px 10px 0px ${(props) => props.theme.blue};
     }
     img {
       margin-bottom: 0.5rem;
@@ -32,7 +32,7 @@ const Container = styled.div`
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      color: ${props => props.theme.white};
+      color: ${(props) => props.theme.white};
       .name,
       .price {
         text-align: center;
@@ -51,8 +51,8 @@ const Container = styled.div`
       }
       button {
         background: transparent;
-        color: ${props => props.theme.blue};
-        border: 2px solid ${props => props.theme.blue};
+        color: ${(props) => props.theme.blue};
+        border: 2px solid ${(props) => props.theme.blue};
         border-radius: 1rem;
         font-size: 1.5rem;
 
@@ -85,7 +85,7 @@ const Product = ({ product, theme }) => {
           <p className="name">{product.name}</p>
           <div className="price">
             <p>{product.price}.00 </p>
-            <button>Buy Now</button>
+            <button id={product.name}>Buy Now</button>
           </div>
         </a>
       </div>

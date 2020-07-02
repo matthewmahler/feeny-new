@@ -26,15 +26,15 @@ const Container = styled.div`
     min-height: 45%;
     background-image: linear-gradient(
         to bottom,
-        ${props => props.theme.black}cc,
-        ${props => props.theme.black}ff
+        ${(props) => props.theme.black}cc,
+        ${(props) => props.theme.black}ff
       ),
-      url(${props => props.bg});
+      url(${(props) => props.bg});
     background-size: cover;
     background-repeat: no-repeat;
     font-size: 1.2rem;
     border-radius: 1rem;
-    box-shadow: 10px 10px 5px 0px ${props => props.theme.black}99;
+    box-shadow: 10px 10px 5px 0px ${(props) => props.theme.black}99;
     .buttons {
       box-sizing: border-box;
       width: 100%;
@@ -47,29 +47,29 @@ const Container = styled.div`
         box-sizing: border-box;
         width: 100%;
         font-size: 1.4rem;
-        color: ${props => props.theme.white};
+        color: ${(props) => props.theme.white};
 
         cursor: pointer;
         background-color: transparent;
         border: none;
         :hover {
-          color: ${props => props.theme.blue};
+          color: ${(props) => props.theme.blue};
           box-sizing: border-box;
         }
       }
       .selected {
-        color: ${props => props.theme.blue};
+        color: ${(props) => props.theme.blue};
       }
     }
   }
   @media only screen and (max-width: 420px) {
     section::after,
     section::before {
-      background-color: ${props => props.theme.black};
+      background-color: ${(props) => props.theme.black};
     }
     .cardWrapper {
       padding: 1rem;
-      background-color: ${props => props.theme.black};
+      background-color: ${(props) => props.theme.black};
       font-size: 1rem;
       border-radius: 0;
       .buttons {
@@ -81,7 +81,7 @@ const Container = styled.div`
   }
 `;
 
-const About = props => {
+const About = (props) => {
   const mainFade = useSpring({
     from: {
       opacity: 0,
@@ -152,7 +152,7 @@ const About = props => {
           }
         }
       `}
-      render={data => {
+      render={(data) => {
         const portrait =
           data.contentfulAbout.bios[currentBio].portraitProfileImage.fluid;
         const landscape =
@@ -174,6 +174,7 @@ const About = props => {
                     {buttons.map((button, index) => {
                       return (
                         <button
+                          id={button.text}
                           onClick={() => setCurrentBio(index)}
                           className={currentBio === index ? 'selected' : null}
                           key={index}

@@ -14,20 +14,20 @@ const Container = styled.div`
     box-sizing: border-box;
     width: 100%;
     font-size: 1.2rem;
-    color: ${props => props.theme.white};
+    color: ${(props) => props.theme.white};
     padding: 1rem;
     cursor: pointer;
     background-color: transparent;
-    border: 1px solid ${props => props.theme.white};
+    border: 1px solid ${(props) => props.theme.white};
     :hover {
-      color: ${props => props.theme.blue};
-      border: 1px solid ${props => props.theme.blue};
+      color: ${(props) => props.theme.blue};
+      border: 1px solid ${(props) => props.theme.blue};
       box-sizing: border-box;
     }
   }
   .selected {
-    color: ${props => props.theme.blue};
-    border-bottom: 1px solid ${props => props.theme.blue};
+    color: ${(props) => props.theme.blue};
+    border-bottom: 1px solid ${(props) => props.theme.blue};
   }
   @media only screen and (max-width: 420px) {
     button {
@@ -36,8 +36,8 @@ const Container = styled.div`
   }
 `;
 
-const ButtonContainer = props => {
-  onclick = i => {
+const ButtonContainer = (props) => {
+  onclick = (i) => {
     if (i === 0) {
       props.switchPanel(true);
     }
@@ -50,6 +50,7 @@ const ButtonContainer = props => {
       {props.buttons.map((button, i) => {
         return (
           <button
+            id={button.text}
             className={props.showPanel ? 'selected' : null}
             onClick={() => onclick(i)}
           >
