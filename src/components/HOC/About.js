@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { StaticQuery, graphql } from 'gatsby';
-import BackgroundImage from 'gatsby-background-image';
+import { getImage } from 'gatsby-plugin-image';
+import { BgImage } from 'gbimage-bridge';
 import BioContainer from '../Containers/BioContainer';
 import { useWindowSize } from '../Hooks/useWindowSize';
 
@@ -91,7 +92,6 @@ const About = (props) => {
   });
 
   let [width, height] = useWindowSize();
-
   const [currentBio, setCurrentBio] = useState(0);
 
   const buttons = [
@@ -124,28 +124,18 @@ const About = (props) => {
               position
               landscapeProfileImage {
                 id
-                fluid(quality: 100) {
-                  aspectRatio
-                  base64
-                  sizes
-                  src
-                  srcSet
-                  srcSetWebp
-                  srcWebp
-                  tracedSVG
+                gatsbyImageData
+                title
+                file {
+                  url
                 }
               }
               portraitProfileImage {
                 id
-                fluid(quality: 100) {
-                  aspectRatio
-                  base64
-                  sizes
-                  src
-                  srcSet
-                  srcSetWebp
-                  srcWebp
-                  tracedSVG
+                gatsbyImageData
+                title
+                file {
+                  url
                 }
               }
             }
@@ -153,21 +143,33 @@ const About = (props) => {
         }
       `}
       render={(data) => {
-        const portrait =
-          data.contentfulAbout.bios[currentBio].portraitProfileImage.fluid;
-        const landscape =
-          data.contentfulAbout.bios[currentBio].landscapeProfileImage.fluid;
         return (
           <animated.div style={mainFade}>
-            <BackgroundImage
+            <BgImage
               Tag="section"
-              fluid={height > width ? portrait : landscape}
+              image={
+                height > width
+                  ? getImage(
+                      data.contentfulAbout.bios[currentBio].portraitProfileImage
+                    )
+                  : getImage(
+                      data.contentfulAbout.bios[currentBio]
+                        .landscapeProfileImage
+                    )
+              }
               backgroundColor={props.theme.darkBlue}
               fadeIn={true}
+              style={{ width: '100%' }}
             >
               <Container
                 theme={props.theme}
-                bg={height > width ? portrait.src : landscape.src}
+                bg={
+                  height > width
+                    ? data.contentfulAbout.bios[currentBio].portraitProfileImage
+                        .file.url
+                    : data.contentfulAbout.bios[currentBio]
+                        .landscapeProfileImage.file.url
+                }
               >
                 <div className="cardWrapper">
                   <div className="buttons">
@@ -175,7 +177,9 @@ const About = (props) => {
                       return (
                         <button
                           id={button.text}
-                          onClick={() => setCurrentBio(index)}
+                          onClick={() => {
+                            setCurrentBio(index);
+                          }}
                           className={currentBio === index ? 'selected' : null}
                           key={index}
                         >
@@ -192,7 +196,7 @@ const About = (props) => {
                   </animated.div>
                 </div>
               </Container>
-            </BackgroundImage>
+            </BgImage>
           </animated.div>
         );
       }}

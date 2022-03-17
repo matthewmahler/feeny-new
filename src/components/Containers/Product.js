@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 
 const Container = styled.div`
   display: flex;
@@ -77,14 +78,15 @@ const Container = styled.div`
   }
 `;
 const Product = ({ product, theme }) => {
+  const image = getImage(product.productImage);
   return (
     <Container theme={theme}>
       <div className="product">
-        <a href={product.url} target="_blank">
-          <img src={product.image} alt={product.name} />
+        <a href={`https://feeny.launchcart.store/`} target="_blank">
+          <GatsbyImage image={image} alt="" />
           <p className="name">{product.name}</p>
           <div className="price">
-            <p>{product.price}.00 </p>
+            <p>${product.variants[0].retail_price}.00 </p>
             <button id={product.name}>Buy Now</button>
           </div>
         </a>

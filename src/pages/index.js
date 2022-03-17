@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { useSpring, animated } from 'react-spring';
-import cheerio from 'cheerio';
-import axios from 'axios';
+
 import moment from 'moment';
 
 import { useFetch } from '../components/Hooks/useFetch';
 import '../fonts/fonts.css';
 import Layout from '../components/Layout';
-import Landing from '../components/Templates/Landing';
-import About from '../components/Templates/About';
-import Gallery from '../components/Templates/Gallery.js';
-import Stream from '../components/Templates/Stream.js';
-import Tour from '../components/Templates/Tour.js';
-import Merch from '../components/Templates/Merch.js';
+import Landing from '../components/HOC/Landing';
+import About from '../components/HOC/About';
+import Gallery from '../components/HOC/Gallery.js';
+import Stream from '../components/HOC/Stream.js';
+import Tour from '../components/HOC/Tour.js';
+import Merch from '../components/HOC/Merch.js';
 import Nav from '../components/Containers/Nav';
 import bg from '../images/IMG_9354.jpg';
 
@@ -37,12 +36,10 @@ html{
     overflow: scroll;
     font-size: 62.5%; 
     box-sizing: border-box;
-    width: 100vw;
-    height: 100vh;
     ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
+   display:none ;
 }
+scrollbar-width: none ;
   
   h1, 
     h2, 
@@ -113,48 +110,6 @@ const HomePage = () => {
     });
   }
 
-  // Merch call
-  const [productsLoading, setProductsLoading] = useState(true);
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    const baseURL = 'https://feeny.bandcamp.com';
-    var cors = 'https://cors-anywhere.herokuapp.com/';
-
-    axios.get(cors + 'https://feeny.bandcamp.com/merch').then((response) => {
-      const $ = cheerio.load(response.data);
-
-      const urlElems = $('li.merch-grid-item');
-      // We now loop through all the elements found
-      for (let i = 0; i < urlElems.length; i++) {
-        let product = {
-          id: i,
-          name: null,
-          image: null,
-          price: null,
-          url: null,
-        };
-        const name = $(urlElems[i]).find('p.title');
-        const image = $(urlElems[i]).find('img');
-        const price = $(urlElems[i]).find('span.price');
-        const url = $(urlElems[i]).find('a');
-
-        if (name && image && price && url) {
-          product.name = $(name).text().trim();
-
-          product.image = $(image).attr('src');
-
-          product.price = $(price).text().trim();
-          product.url = baseURL + $(url).attr('href');
-        }
-        setProducts((oldArray) => [...oldArray, product]);
-
-        if (i === urlElems.length - 1) {
-          setProductsLoading(false);
-        }
-      }
-    });
-  }, []);
-
   const pages = [
     <Landing theme={theme} changePage={changePage} />,
     <About theme={theme} changePage={changePage} />,
@@ -177,12 +132,7 @@ const HomePage = () => {
       events={filteredEvents}
       loading={showsLoading}
     />,
-    <Merch
-      theme={theme}
-      changePage={changePage}
-      products={products}
-      loading={productsLoading}
-    />,
+    <Merch theme={theme} changePage={changePage} />,
   ];
 
   function changePage(index) {

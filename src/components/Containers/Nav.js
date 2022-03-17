@@ -14,7 +14,6 @@ const Container = styled.nav`
   z-index: 100;
   box-sizing: border-box;
   h1 {
-    width: auto;
     font-family: 'miller';
     font-style: italic;
     font-size: 4rem;
@@ -26,7 +25,7 @@ const Container = styled.nav`
     color: ${(props) => props.theme.white};
     box-sizing: border-box;
     margin: 0;
-    margin-left: 3rem;
+    padding-left: 3rem;
     height: 100%;
     letter-spacing: 5px;
     span {
@@ -34,7 +33,7 @@ const Container = styled.nav`
     }
   }
   .buttons {
-    margin-right: 2rem;
+    padding-right: 2rem;
     box-sizing: border-box;
     width: 100%;
     display: flex;
@@ -99,7 +98,7 @@ const Nav = (props) => {
   const trail = useTrail(buttons.length, {
     opacity: 1,
     transform: 'translate3d(0,0,0)',
-    from: { opacity: 0, transform: 'translate3d(100px,0,0)' },
+    from: { opacity: 0, transform: 'translate3d(-100px,0,0)' },
   });
 
   const slideRight = useSpring({

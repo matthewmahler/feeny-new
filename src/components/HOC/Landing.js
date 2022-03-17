@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { StaticQuery, graphql } from 'gatsby';
+import { getImage } from 'gatsby-plugin-image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { useWindowSize } from '../Hooks/useWindowSize';
@@ -122,25 +123,16 @@ const Landing = (props) => {
               }
             }
             backgroundImage {
-              file {
-                url
-              }
+              gatsbyImageData
             }
             logo {
-              fluid {
-                base64
-                src
-                srcSet
-                srcWebp
-                srcSetWebp
-                sizes
-              }
+              gatsbyImageData
             }
           }
         }
       `}
       render={(data) => {
-        const portrait = data.contentfulLanding.backgroundImage.file.url;
+        const portrait = getImage(data.contentfulLandingbackgroundImage);
         const landscape = data.contentfulLanding.backgroundVideo.file.url;
 
         return (
