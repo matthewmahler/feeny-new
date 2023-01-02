@@ -21,7 +21,7 @@
     "babel-plugin-styled-components": "^2.0.6",
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^16.0.0",
-    "gatsby": "^4.10.0",
+    "gatsby": "^4.25.1",
     "gatsby-background-image": "^1.6.0",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-facebook-pixel": "^1.0.8",
