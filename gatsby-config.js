@@ -61,12 +61,5 @@ module.exports = {
         pixelId: '594274238153379',
       },
     },
-    {
-      resolve: `gatsby-source-printful`,
-      options: {
-        apiKey: 'vjn0cxs2-0h4j-x29z:y72p-2v6kq1oldqt2',
-        paginationLimit: 100, // Default value is 20
-      },
-    },
   ],
 };

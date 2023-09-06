@@ -56,11 +56,11 @@ const Container = styled.div`
       box-sizing: border-box;
       will-change: transform;
       background-color: transparent;
-      box-shadow: 10px 10px 5px 0px ${props => props.theme.black}cc;
+      box-shadow: 10px 10px 5px 0px ${(props) => props.theme.black}cc;
       transition: 0.2s;
       :hover {
         transition: 0s;
-        box-shadow: 10px 10px 5px 0px ${props => props.theme.white}cc;
+        box-shadow: 10px 10px 5px 0px ${(props) => props.theme.white}cc;
       }
 
       .profileImageContainer {
@@ -77,7 +77,7 @@ const Container = styled.div`
           backface-visibility: hidden;
         }
         .overlay {
-          background-color: ${props => props.theme.black}cc;
+          background-color: ${(props) => props.theme.black}cc;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -91,11 +91,11 @@ const Container = styled.div`
           padding: 0.5rem;
           border-radius: 1rem;
           p {
-            color: ${props => props.theme.white}ff;
-            font-size: 1.5rem;
+            color: ${(props) => props.theme.white}ff;
+            font-size: 1.2rem;
             text-align: center;
             a {
-              color: ${props => props.theme.white}ff;
+              color: ${(props) => props.theme.white}ff;
               text-decoration: none;
             }
           }
@@ -122,7 +122,7 @@ const Container = styled.div`
   }
 `;
 
-const MediaWrapper = props => {
+const MediaWrapper = (props) => {
   const [hovered, setHovered] = useState(null);
 
   const trail = useTrail(props.media.length, {

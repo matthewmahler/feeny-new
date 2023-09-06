@@ -44,6 +44,7 @@ const Merch = (props) => {
   const data = useStaticQuery(query);
   const portrait = getImage(data.contentfulMerch.portraitBackgroundImage);
   const landscape = getImage(data.contentfulMerch.landscapeBackgroundImage);
+
   return (
     <BgImage
       Tag="section"
@@ -53,11 +54,11 @@ const Merch = (props) => {
     >
       <Container theme={props.theme}>
         <div className="wrapper">
-          {data.allPrintfulProduct.edges.map((product, i) => {
+          {props.products.result.map((product, i) => {
             return (
               <Product
                 key={i}
-                product={product.node}
+                product={product}
                 theme={props.theme}
               ></Product>
             );
@@ -79,23 +80,7 @@ const query = graphql`
         gatsbyImageData
       }
     }
-    allPrintfulProduct {
-      edges {
-        node {
-          name
-          slug
-          variants {
-            name
-            retail_price
-          }
-          productImage {
-            childImageSharp {
-              gatsbyImageData
-            }
-          }
-        }
-      }
-    }
   }
 `;
+
 export default Merch;

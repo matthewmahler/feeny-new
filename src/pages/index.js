@@ -91,7 +91,7 @@ const HomePage = () => {
 
   // Instagram call
   const [gallery, galleryLoading] = useFetch(
-    `https://graph.facebook.com/v4.0/17841400290867787/media?fields=permalink%2Clike_count%2Ccaption%2Cmedia_type%2Cmedia_url&access_token=${process.env.GATSBY_FACEBOOK_ACCESS_TOKEN}`
+    `https://graph.facebook.com/v12.0/17841400290867787/media?fields=permalink%2Clike_count%2Ccaption%2Cmedia_type%2Cmedia_url&access_token=${process.env.GATSBY_FACEBOOK_ACCESS_TOKEN}`
   );
   // Youtube call
   const [video, videoLoading] = useFetch(
@@ -100,12 +100,44 @@ const HomePage = () => {
 
   // Events call
   const [shows, showsLoading] = useFetch(
-    `https://graph.facebook.com/v4.0/me?fields=events%7Bname%2Cstart_time%2Cplace%2Cid%7D&access_token=${process.env.GATSBY_FACEBOOK_ACCESS_TOKEN}`
+    `https://graph.facebook.com/v12.0/me/events?fields=name,place,id,start_time&access_token=${process.env.GATSBY_FACEBOOK_ACCESS_TOKEN}`
   );
+
+  const [products, productsLoading] = useFetch(
+    `https://api.printful.com/store/products`,
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.GATSBY_PRINTFUL_API_KEY}`,
+      },
+    }
+  );
+
+  const iterativeApiCall = async (id) => {
+    return await fetch(`https://api.printful.com/store/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${process.env.GATSBY_PRINTFUL_API_KEY}`,
+      },
+    }).then((response) => response.json);
+  };
+
+  const aggregateResponses = async (products) => {
+    return await Promise.all(
+      await products.result
+        .map((product) => product.id)
+        .map(async (i) => {
+          return { i, product: await iterativeApiCall(i) };
+        })
+    );
+  };
+
+  if (!productsLoading && products && !products.error) {
+    const aggregatedProducts = aggregateResponses(products);
+    console.log(aggregatedProducts);
+  }
 
   let filteredEvents;
   if (!showsLoading && shows && !shows.error) {
-    filteredEvents = shows.events.data.filter((event) => {
+    filteredEvents = shows.data.filter((event) => {
       return moment() < moment(event.start_time);
     });
   }
@@ -132,7 +164,7 @@ const HomePage = () => {
       events={filteredEvents}
       loading={showsLoading}
     />,
-    <Merch theme={theme} changePage={changePage} />,
+    <Merch theme={theme} changePage={changePage} products={products} />,
   ];
 
   function changePage(index) {
